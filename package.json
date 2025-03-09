@@ -1,0 +1,10 @@
+{
+  "name": "astra",
+  "version": "1.0.0",
+  "description": "🚀 Fast, reliable and easy-to-use js-to-exe compiler.",
+  "main": "cli.js",
+  "repository": "https://github.com/QwertyCodeQC/astra",
+  "author": "QwertyCodeQC",
+  "license": "MIT",
+  "private": false
+}
