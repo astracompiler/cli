@@ -1,16 +1,35 @@
 {
   "name": "astra-cli",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "main": "./dist/astra.js",
   "repository": "https://github.com/astracompiler/cli",
   "author": "QwertyCode <167351530+QwertyCodeQC@users.noreply.github.com>",
   "license": "MIT",
   "type": "module",
   "description": "🚀 Fast, reliable and easy-to-use js-to-exe compiler.",
-  "scripts": {
-    "minify": "node ./minify.tool.js",
-    "astra": "node ./dist/astra.js"
+  "bugs": {
+    "url": "https://github.com/astracompiler/cli/issues"
   },
+  "scripts": {
+    "minify": "tsc && node ./minify.tool.js",
+    "astra": "node ./dist/astra.js",
+    "ts": "tsc"
+  },
+  "keywords": [
+    "astra",
+    "compiler",
+    "js-to-exe",
+    "js",
+    "exe",
+    "fast",
+    "reliable",
+    "easy-to-use",
+    "js2exe",
+    "nexe",
+    "pkg",
+    "esbuild",
+    "windows"
+  ],
   "bin": {
     "astra": "./dist/astra.js"
   },
@@ -45,6 +64,7 @@
     "eslint": "^9.22.0",
     "globals": "^16.0.0",
     "terser": "^5.39.0",
+    "typescript": "^5.8.2",
     "typescript-eslint": "^8.27.0"
   },
   "files": [
