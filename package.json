@@ -1,10 +1,53 @@
 {
-  "name": "astra",
-  "version": "1.0.0",
-  "description": "🚀 Fast, reliable and easy-to-use js-to-exe compiler.",
-  "main": "cli.js",
-  "repository": "https://github.com/QwertyCodeQC/astra",
-  "author": "QwertyCodeQC",
+  "name": "astra-cli",
+  "version": "1.0.0-beta.1",
+  "main": "./dist/astra.js",
+  "repository": "https://github.com/astracompiler/cli",
+  "author": "QwertyCode <167351530+QwertyCodeQC@users.noreply.github.com>",
   "license": "MIT",
-  "private": false
+  "type": "module",
+  "description": "🚀 Fast, reliable and easy-to-use js-to-exe compiler.",
+  "scripts": {
+    "minify": "node ./minify.tool.js",
+    "astra": "node ./dist/astra.js"
+  },
+  "bin": {
+    "astra": "./dist/astra.js"
+  },
+  "exports": {
+    "configtypes": "./dist/configtypes.js"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^7.3.3",
+    "chalk": "^5.4.1",
+    "cli-progress": "^3.12.0",
+    "cosmiconfig": "^9.0.0",
+    "dirname-filename-esm": "^1.1.2",
+    "esbuild": "^0.25.0",
+    "got": "^14.4.6",
+    "postject": "^1.0.0-alpha.5",
+    "rcedit": "^4.0.1",
+    "read-pkg": "^9.0.1",
+    "semver": "^7.7.1",
+    "signale": "^1.4.0",
+    "temp": "^0.9.4",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.22.0",
+    "@types/cli-progress": "^3.11.6",
+    "@types/got": "^9.6.12",
+    "@types/node": "^22.13.10",
+    "@types/semver": "^7.5.8",
+    "@types/signale": "^1.4.7",
+    "@types/temp": "^0.9.4",
+    "@types/yargs": "^17.0.33",
+    "eslint": "^9.22.0",
+    "globals": "^16.0.0",
+    "terser": "^5.39.0",
+    "typescript-eslint": "^8.27.0"
+  },
+  "files": [
+    "dist"
+  ]
 }
