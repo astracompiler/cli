@@ -1,0 +1,6 @@
+dist
+yarn.lock
+*.test.js
+astra.config.js
+dist-test
+node_modules
