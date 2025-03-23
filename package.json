@@ -62,7 +62,6 @@
     "@types/temp": "^0.9.4",
     "@types/yargs": "^17.0.33",
     "eslint": "^9.22.0",
-    "globals": "^16.0.0",
     "terser": "^5.39.0",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.27.0"
