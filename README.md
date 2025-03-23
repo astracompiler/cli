@@ -12,7 +12,6 @@
 
 ## Why Astra?
 Astra is (probably) the best compiler available on npm.
-
 ### Features
 - **Esthetic CLI** - With [signale](https://npmjs.com/package/signale), [inquirer](https://www.npmjs.com/package/@inquirer/prompts) and [chalk](https://npmjs.com/package/chalk), Astra provides a great user experience.
 - **Fast build time** - Powered by [esbuild](https://npmjs.com/package/esbuild), Astra ensures the fastest possible compilation speed.
