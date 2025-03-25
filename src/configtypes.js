@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import esbuild from 'esbuild';
 /**
  * @typedef {Object} Config
@@ -7,4 +8,3 @@ import esbuild from 'esbuild';
  * @property {string[]} [assets] - Assets to include in the blob
  * @property {{ icon: string, companyName: string, fileDescription: string, productName: string, fileVersion: string, productVersion: string, copyright: string }} [exe] - Application metadata (like icon, name, description etc.)
  */ 
- 

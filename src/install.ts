@@ -7,7 +7,6 @@ import chalk from "chalk";
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
-import shasumMatch from './helpers/shasum.js';
 import got, { RequestError } from 'got';
 export default async function install({ ver }: { ver: string }) {
     let versionName: string;

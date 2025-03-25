@@ -1,4 +1,4 @@
-import { input, select } from '@inquirer/prompts';
+import { select } from '@inquirer/prompts';
 import got, { RequestError } from 'got';
 import log from 'signale';
 import { getVersionPath, isVersionInstalled, listOfAvailableVersions } from './helpers/cache.js';
@@ -15,10 +15,8 @@ import temp from 'temp';
 import { inject } from 'postject';
 import { spawnSync } from 'child_process';
 import shasumMatch from './helpers/shasum.js';
-import { createRequire } from 'module';
 import { readPackage } from 'read-pkg';
-const require = createRequire(import.meta.url);
-const rcedit = require('rcedit');
+import rcedit from 'rcedit';
 // steps for building exe (4 steps: build, generate blob, inject blob, set metadata)
 const STEPS = 4;
 function step(curr: number) {
@@ -32,7 +30,7 @@ export default async function build({ outDir, node, disShasumCheck, entry }: { o
             if (pack.main) {
                 entry = path.resolve(pack.main)
             }
-        } catch (error) {
+        } catch {
             log.error("Cloud not find main file in package.json. Please specify a file to build.")
             process.exit(1)
         }
@@ -182,7 +180,7 @@ export default async function build({ outDir, node, disShasumCheck, entry }: { o
     let iconpath;
     try {
         iconpath = path.resolve(config?.exe.icon) 
-    } catch (error) {
+    } catch {
         iconpath = undefined
     }
     await rcedit(nodePath, {
@@ -206,7 +204,7 @@ export default async function build({ outDir, node, disShasumCheck, entry }: { o
         main: outPathEsbuild,
         output: blobPath,
         disableExperimentalSEAWarning: true,
-        assets: config?.assets || [],
+        assets: config?.assets || {},
         loader: {
             node: true
         }
@@ -214,7 +212,11 @@ export default async function build({ outDir, node, disShasumCheck, entry }: { o
 
 
     fs.writeFileSync(seaConfigPath, JSON.stringify(nodeBlobConfig))
-    spawnSync(getVersionPath(versionName + ".exe"), ["--experimental-sea-config", seaConfigPath])
+    const nodeProcess = spawnSync(getVersionPath(versionName + ".exe"), ["--experimental-sea-config", seaConfigPath], { encoding: 'utf-8' })
+    if (nodeProcess.status !== 0) {
+        new log.Signale({ scope: "node" }).error(nodeProcess.stderr)
+        process.exit(1)
+    }
     log.success("Blob generated!")
     log.start(step(4) + " Injecting blob...")
     await inject(nodePath, 'NODE_SEA_BLOB', fs.readFileSync(blobPath), {
@@ -225,5 +227,5 @@ export default async function build({ outDir, node, disShasumCheck, entry }: { o
     console.log()
     log.complete("Project built successfully! 🚀")
     log.info("You can now run your project by typing " + chalk.yellowBright("\"" + nodePath + "\""))
-    log.info("Wanna use this preset later? Copy this command: " + chalk.yellowBright(`astra build "${path.resolve(entry)}" -o "${nodePath}" -n "${versionName}" ${disShasumCheck ? "--disShasumCheck" : ""}`))
+    log.info("Wanna use this preset later? Copy this command: \n" + chalk.yellowBright(`astra build "${path.resolve(entry)}" -o "${nodePath}" -n "${versionName}" ${disShasumCheck ? "--disShasumCheck" : ""}`))
 }

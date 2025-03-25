@@ -16,11 +16,11 @@ export default async function versions() {
             log.error("Request failed!")
             log.error("We don't know what happened... Maybe this helps:")
             log.error("Error code: " + err.response?.statusCode + " (" + err.response?.statusMessage + ")")
-            log.error(`Axios error code (try googling \"node error ${err.code}\"): ${err.code}`)
+            log.error(`Axios error code (try googling "node http error ${err.code}"): ${err.code}`)
             
         }
     }
-    let assetNames: string[] = [];
+    const assetNames: string[] = [];
     assetNames.push(...(res.assets as { name: string }[]).map((asset) => asset.name));
     const versions = assetNames.map(nameparse);
     versions.sort((a, b) => semver.compare(b.version, a.version));
