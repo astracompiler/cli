@@ -1,6 +1,6 @@
 {
   "name": "astra-cli",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-rc",
   "main": "./dist/astra.js",
   "repository": "https://github.com/astracompiler/cli",
   "author": "QwertyCode <167351530+QwertyCodeQC@users.noreply.github.com>",
@@ -30,9 +30,7 @@
     "esbuild",
     "windows"
   ],
-  "bin": {
-    "astra": "./dist/astra.js"
-  },
+  "bin": "./dist/astra.js",
   "exports": {
     "configtypes": "./dist/configtypes.js"
   },
