@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 22
 
-      - name: Enable corepack and acrivate yarn
+      - name: Enable corepack and activate yarn
         run: corepack enable && corepack prepare yarn --activate
 
       - name: Install deps
