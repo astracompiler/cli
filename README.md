@@ -19,11 +19,11 @@ It's aiming to compile servers (express, fastify) or CLIs (commander) so it's no
 
 For now it only compiles windows applications. (working on macOS and linux)
 ### Features
-- **Esthetic CLI** - With [signale](https://npmjs.com/package/signale), [inquirer](https://www.npmjs.com/package/@inquirer/prompts) and [chalk](https://npmjs.com/package/chalk), Astra provides a great user experience.
+- **Delightful DX** - With [signale](https://npmjs.com/package/signale), [inquirer](https://www.npmjs.com/package/@inquirer/prompts) and [chalk](https://npmjs.com/package/chalk), Astra provides a great developer experience.
 - **Fast build time** - Powered by [esbuild](https://npmjs.com/package/esbuild), Astra ensures the fastest possible compilation speed.
 - **Improved support for ECMAScript** - Astra supports compiling ESM-based applications, with workarounds for limitations in Node.js SEA.
 - **Standalone Executable** - Generates a single `.exe` or binary file that includes all dependencies.
-- **Custom Metadata** - Modify metadata (icon, name, version, etc.) of the generated executable.
+- **Make exe your own** - Modify metadata (icon, name, version, etc.) of the generated executable.
 - **Built-in Compression** - Reduces the size of the final executable.
 ## Getting Started
 Install Astra globally using Yarn or npm:
