@@ -19,12 +19,12 @@ It's aiming to compile servers (express, fastify) or CLIs (commander) so it's no
 
 For now it only compiles windows applications. (working on macOS and linux)
 ### Features
-- **Delightful DX** - With [signale](https://npmjs.com/package/signale), [inquirer](https://www.npmjs.com/package/@inquirer/prompts) and [chalk](https://npmjs.com/package/chalk), Astra provides a great developer experience.
+- **Different than the others** - Astra is a new approach to compiling JavaScript/TypeScript applications. It uses a different method than other compilers like pkg or nexe. 
 - **Fast build time** - Powered by [esbuild](https://npmjs.com/package/esbuild), Astra ensures the fastest possible compilation speed.
 - **Improved support for ECMAScript** - Astra supports compiling ESM-based applications, with workarounds for limitations in Node.js SEA.
+- **Delightful DX** - With [signale](https://npmjs.com/package/signale), [inquirer](https://www.npmjs.com/package/@inquirer/prompts) and [chalk](https://npmjs.com/package/chalk), Astra provides a great developer experience.
 - **Standalone Executable** - Generates a single `.exe` or binary file that includes all dependencies.
 - **Make exe your own** - Modify metadata (icon, name, version, etc.) of the generated executable.
-- **Built-in Compression** - Reduces the size of the final executable.
 
 ## Contributing
 🤝 I welcome pull requests! Every contribution will be reviewed and appreciated - even small fixes.
