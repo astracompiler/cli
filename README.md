@@ -25,6 +25,10 @@ For now it only compiles windows applications. (working on macOS and linux)
 - **Standalone Executable** - Generates a single `.exe` or binary file that includes all dependencies.
 - **Make exe your own** - Modify metadata (icon, name, version, etc.) of the generated executable.
 - **Built-in Compression** - Reduces the size of the final executable.
+
+## Contributing
+🤝 I welcome pull requests! Every contribution will be reviewed and appreciated — even small fixes.
+
 ## Getting Started
 Install Astra globally using Yarn or npm:
 
@@ -61,9 +65,6 @@ astra --help
 2. Then astra is generating blob which will be injected into node.exe binary,
 3. Next astra is editing metadata of your binary (adding icon, copyright),
 4. And finally postject injects blob into final executable.
-
-## Contributing
-Contributions are welcome! Feel free to open issues or submit pull requests.
 
 ## License
 Astra is licensed under the MIT License.
