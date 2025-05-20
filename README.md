@@ -12,6 +12,12 @@
 
 ## Why Astra?
 Astra is (probably) the best compiler available on npm.
+
+Average exe is ~70-80MB (depends on your code) so it's lighter than most compilers
+
+It's aiming to compile servers (express, fastify) or CLIs (commander) so it's not replacement of electron. 
+
+For now it only compiles windows applications. (working on macOS and linux)
 ### Features
 - **Esthetic CLI** - With [signale](https://npmjs.com/package/signale), [inquirer](https://www.npmjs.com/package/@inquirer/prompts) and [chalk](https://npmjs.com/package/chalk), Astra provides a great user experience.
 - **Fast build time** - Powered by [esbuild](https://npmjs.com/package/esbuild), Astra ensures the fastest possible compilation speed.
@@ -49,6 +55,12 @@ For more options, run:
 ```sh
 astra --help
 ```
+
+## How it works?
+1. Code is linted and bundled with esbuild,
+2. Then astra is generating blob which will be injected into node.exe binary,
+3. Next astra is editing metadata of your binary (adding icon, copyright),
+4. And finally postject injects blob into final executable.
 
 ## Contributing
 Contributions are welcome! Feel free to open issues or submit pull requests.
