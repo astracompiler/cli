@@ -4,16 +4,16 @@ import nameparse, { generate, isLTS } from "./helpers/nameparse.js";
 import prgss from "cli-progress";
 import { select } from "@inquirer/prompts";
 import chalk from "chalk";
-import fs from 'fs';
-import path from 'path';
-import os from 'os';
+import fs from 'node:fs';
+import path from 'node:path';
+import os from 'node:os';
 import got, { RequestError } from 'got';
 export default async function install({ ver }: { ver: string }) {
     let versionName: string;
     try {
         await got("https://google.com")
     } catch (err) {
-        if (err instanceof RequestError && err.code == "ENOTFOUND") {
+        if (err instanceof RequestError && err.code === "ENOTFOUND") {
             log.error("Could not connect to Internet. Please check your internet connection.");
             process.exit(1);
         }
@@ -22,7 +22,7 @@ export default async function install({ ver }: { ver: string }) {
     if (ver) {
         const regex = /^node_v(\d+\.\d+\.\d+)-([a-z]+)-(x86|x64|arm64)$/;
         const lts = await isLTS(ver);
-        versionName = generate({ ...nameparse(ver + ".exe"), isLTS: lts });
+        versionName = generate({ ...nameparse(`${ver}.exe`), isLTS: lts });
         if (!regex.test(ver)) {
             log.error("Invalid version format. Please use the format node_{version}-{platform}-{arch}");
             process.exit(1);
@@ -40,8 +40,8 @@ export default async function install({ ver }: { ver: string }) {
             choices: versions
         })
     }
-    log.start("Downloading " + versionName + "...");
-    const versionFilename = versionName + ".exe";
+    log.start(`Downloading ${versionName}...`);
+    const versionFilename = `${versionName}.exe`;
     const writer = fs.createWriteStream(path.join(os.homedir(), '.astra', 'versions', versionFilename));
     if (!fs.existsSync(path.join(os.homedir(), '.astra', 'versions', versionName as string))) {
         const bar = new prgss.SingleBar({}, prgss.Presets.shades_classic);
@@ -60,7 +60,7 @@ export default async function install({ ver }: { ver: string }) {
         
             writer.on("finish", () => {
                 bar.stop();
-                log.success("Successfully downloaded " + versionName + "!");
+                log.success(`Successfully downloaded ${versionName}!`);
                 resolve(null);
             });
         

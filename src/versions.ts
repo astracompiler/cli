@@ -9,13 +9,13 @@ export default async function versions() {
         res = await got("https://api.github.com/repos/astracompiler/binaries/releases/latest").json() as any;
     } catch (err) {
         if (err instanceof RequestError) {
-            if (err.code == "ENOTFOUND") {
+            if (err.code === "ENOTFOUND") {
                 log.error("Could not connect to GitHub. Please check your internet connection.");
                 process.exit(1);
             }
             log.error("Request failed!")
             log.error("We don't know what happened... Maybe this helps:")
-            log.error("Error code: " + err.response?.statusCode + " (" + err.response?.statusMessage + ")")
+            log.error(`Error code: ${err.response?.statusCode} (${err.response?.statusMessage})`)
             log.error(`Axios error code (try googling "node http error ${err.code}"): ${err.code}`)
             
         }

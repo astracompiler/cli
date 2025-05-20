@@ -1,5 +1,5 @@
 import got from "got";
-import path from "path";
+import path from "node:path";
 
 
 

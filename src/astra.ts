@@ -2,13 +2,13 @@
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import chalk from "chalk";
-import path from "path";
+import path from "node:path";
 import { readPackage } from "read-pkg";
 import log from 'signale';
 import { dirname } from "dirname-filename-esm";
 import temp from "temp";
-import fs from "fs";
-import os from "os";
+import fs from "node:fs";
+import os from "node:os";
 
 temp.track();
 const __dirname = dirname(import.meta);
@@ -32,8 +32,8 @@ process.on('uncaughtException', (error) => {
 const quotes = ["Hi :)", "Another project to compile?", "Keep pushing forward!", "You're doing great!", "Debugging is (not) fun!", "Stay positive!", "Believe in yourself!", "One step at a time.", "Consistency is key.", "You're awesome!", "You're a coding ninja!", "You're a coding wizard!", "You're a coding rockstar!", "You're a coding beast!", "You're a coding machine!"]
 
 // astra banner
-console.log("\n  " + chalk.red.bold("Astra") + " " + chalk.gray("v" + VERSION));
-console.log("  " + chalk.rgb(163, 163, 163)(quotes[Math.floor(Math.random() * quotes.length)]) + "\n");
+console.log(`\n  ${chalk.red.bold("Astra")} ${chalk.gray(`v${VERSION}`)}`);
+console.log(`  ${chalk.rgb(163, 163, 163)(quotes[Math.floor(Math.random() * quotes.length)])}\n`);
 
 const cli = yargs(hideBin(process.argv)) //hideBin(process.argv)
 .scriptName("astra")

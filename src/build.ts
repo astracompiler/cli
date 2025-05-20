@@ -5,15 +5,15 @@ import { getVersionPath, isVersionInstalled, listOfAvailableVersions } from './h
 import chalk from 'chalk';
 import nameparse, { generate, isLTS } from './helpers/nameparse.js';
 import semver from 'semver';
-import os from 'os';
+import os from 'node:os';
 import install from './install.js';
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 import esbuild from 'esbuild';
 import getConfig from './helpers/configLoader.js';
 import temp from 'temp';
 import { inject } from 'postject';
-import { spawnSync } from 'child_process';
+import { spawnSync } from 'node:child_process';
 import shasumMatch from './helpers/shasum.js';
 import { readPackage } from 'read-pkg';
 import rcedit from 'rcedit';
@@ -54,7 +54,7 @@ export default async function build({ outDir, node, disShasumCheck, entry }: { o
     try {
         await got("https://api.github.com/repos/astracompiler/binaries/releases/latest");
     } catch (err) {
-        if (err instanceof RequestError && err.code == "ENOTFOUND") {
+        if (err instanceof RequestError && err.code === "ENOTFOUND") {
             log.warn("You are in offline mode. Some features may not work properly.");
             offline = true;
         }
@@ -73,7 +73,7 @@ export default async function build({ outDir, node, disShasumCheck, entry }: { o
     // validate arguments
     const argsValidate = [outDir, node].filter((arg) => arg !== undefined);
     if (argsValidate.length < 2 && argsValidate.length > 0) {
-        log.error("You must provide all arguments or none of them! Current arguments: " + argsValidate.join(", "));
+        log.error(`You must provide all arguments or none of them! Current arguments: ${argsValidate.join(", ")}`);
         process.exit(1);
     } else if (argsValidate.length === 2) {
         argsProvided = true;
@@ -84,8 +84,8 @@ export default async function build({ outDir, node, disShasumCheck, entry }: { o
     }
 
     // verify version
-    const nodeFile = node + ".exe";
-    const nodeLTSFile = node + "-lts.exe";
+    const nodeFile = `${node}.exe`;
+    const nodeLTSFile = `${node}-lts.exe`;
     
     if (argsProvided) {
         const availableAssets = res.assets.map((asset: any) => asset.name);
@@ -102,11 +102,30 @@ export default async function build({ outDir, node, disShasumCheck, entry }: { o
 
     if (!argsProvided) {
         let versions = res.assets;
-        versions = res.assets.map((asset: any) => asset.name).map((name: string) => nameparse(name)).sort((a: any, b: any) => semver.compare(b.version, a.version));
-        versions = versions.map((version: any) => ({ name: `${chalk.green(version.version)} ${chalk.yellow(version.os)} ${chalk.gray(version.arch)} ${version.isLTS ? chalk.green("LTS") : ""}`, value: generate(version) }));
+        type VersionAsset = {
+            name: string;
+            os: string;
+            arch: string;
+            version: string;
+            isLTS: boolean;
+        };
+
+        versions = res.assets
+            .map((asset: any) => asset.name)
+            .map((name: string) => nameparse(name) as VersionAsset)
+            .sort((a: VersionAsset, b: VersionAsset) => semver.compare(b.version, a.version));
+        versions = versions.map((version: VersionAsset) => ({
+            name: `${chalk.green(version.version)} ${chalk.yellow(version.os)} ${chalk.gray(version.arch)} ${version.isLTS ? chalk.green("LTS") : ""}`,
+            value: generate({
+                arch: version.arch as 'x64' | 'x86' | 'arm64',
+                os: version.os as 'win' | 'linux' | 'macos',
+                isLTS: version.isLTS,
+                version: version.version
+            })
+        }));
         console.log(chalk.blueBright.bold("Tips:"))
-        console.log(chalk.greenBright("1. Architecture of your system is " + chalk.yellowBright(os.arch())))
-        console.log(chalk.greenBright("2. Your node version is " + chalk.yellowBright(process.version)))
+        console.log(chalk.greenBright(`1. Architecture of your system is ${chalk.yellowBright(os.arch())}`))
+        console.log(chalk.greenBright(`2. Your node version is ${chalk.yellowBright(process.version)}`))
         console.log(chalk.greenBright(`3. If you don't know which version to choose, select the latest LTS version or type ${chalk.gray("node -v")} in your terminal`));
         console.log()
         versionName = await select({
@@ -115,16 +134,16 @@ export default async function build({ outDir, node, disShasumCheck, entry }: { o
         })
     } else {
         const lts = await isLTS(node);
-        versionName = generate({ ...nameparse(node + ".exe"), isLTS: lts });
+        versionName = generate({ ...nameparse(`${node}.exe`), isLTS: lts });
     }
 
 
-    if (!isVersionInstalled(versionName + '.exe') && !offline) {
-        log.start("Installing " + versionName.replace('-lts', '') + "...")
+    if (!isVersionInstalled(`${versionName}.exe`) && !offline) {
+        log.start(`Installing ${versionName.replace('-lts', '')}...`)
         await install({ ver: versionName.replace('-lts', '') })
     } else if (!offline) {
         if (!disShasumCheck) {
-            const shasum = await shasumMatch(getVersionPath(versionName + '.exe'))
+            const shasum = await shasumMatch(getVersionPath(`${versionName}.exe`))
             if (!shasum) {
                 log.error("Shasum does NOT match!! Reinstalling node...")
                 await install({ ver: versionName.replace('-lts', '') })
@@ -134,7 +153,7 @@ export default async function build({ outDir, node, disShasumCheck, entry }: { o
     }
 
     // build step 1
-    log.start(step(1) + " Building project...")
+    log.start(`${step(1)} Building project...`)
 
     const nodePath = config?.outFile
     ? path.resolve(config.outFile)
@@ -161,7 +180,7 @@ export default async function build({ outDir, node, disShasumCheck, entry }: { o
 
     const bundle = esbuild.buildSync(esbuildConfig)
 
-    const outPathEsbuild = temp.path({ suffix: `.astra.cjs` })
+    const outPathEsbuild = temp.path({ suffix: ".astra.cjs" })
 
     if (bundle.outputFiles && bundle.outputFiles.length > 0) {
         fs.writeFileSync(outPathEsbuild, bundle.outputFiles[0].text)
@@ -173,9 +192,9 @@ export default async function build({ outDir, node, disShasumCheck, entry }: { o
     log.success("Project built!")
 
     // meta step 2
-    log.start(step(2) + " Setting file metadata...");
+    log.start(`${step(2)} Setting file metadata...`);
 
-    fs.copyFileSync(getVersionPath(versionName + ".exe"), nodePath)
+    fs.copyFileSync(getVersionPath(`${versionName}.exe`), nodePath)
     fs.chmodSync(nodePath, 0o755)
     let iconpath;
     try {
@@ -198,7 +217,7 @@ export default async function build({ outDir, node, disShasumCheck, entry }: { o
     log.success("File metadata set!")
 
     // blob step 3
-    log.start(step(3) + " Generating blob...")
+    log.start(`${step(3)} Generating blob...`)
 
     const nodeBlobConfig = {
         main: outPathEsbuild,
@@ -212,13 +231,13 @@ export default async function build({ outDir, node, disShasumCheck, entry }: { o
 
 
     fs.writeFileSync(seaConfigPath, JSON.stringify(nodeBlobConfig))
-    const nodeProcess = spawnSync(getVersionPath(versionName + ".exe"), ["--experimental-sea-config", seaConfigPath], { encoding: 'utf-8' })
+    const nodeProcess = spawnSync(getVersionPath(`${versionName}.exe`), ["--experimental-sea-config", seaConfigPath], { encoding: 'utf-8' })
     if (nodeProcess.status !== 0) {
         new log.Signale({ scope: "node" }).error(nodeProcess.stderr)
         process.exit(1)
     }
     log.success("Blob generated!")
-    log.start(step(4) + " Injecting blob...")
+    log.start(`${step(4)} Injecting blob...`)
     await inject(nodePath, 'NODE_SEA_BLOB', fs.readFileSync(blobPath), {
         sentinelFuse: "NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2"
     })
@@ -226,6 +245,6 @@ export default async function build({ outDir, node, disShasumCheck, entry }: { o
     
     console.log()
     log.complete("Project built successfully! 🚀")
-    log.info("You can now run your project by typing " + chalk.yellowBright("\"" + nodePath + "\""))
-    log.info("Wanna use this preset later? Copy this command: \n" + chalk.yellowBright(`astra build "${path.resolve(entry)}" -o "${nodePath}" -n "${versionName}" ${disShasumCheck ? "--disShasumCheck" : ""}`))
+    log.info(`You can now run your project by typing ${chalk.yellowBright(`\"${nodePath}\"`)}`)
+    log.info(`Wanna use this preset later? Copy this command: \n${chalk.yellowBright(`astra build "${path.resolve(entry)}" -o "${nodePath}" -n "${versionName}" ${disShasumCheck ? "--disShasumCheck" : ""}`)}`)
 }

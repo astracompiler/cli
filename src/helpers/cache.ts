@@ -1,6 +1,6 @@
-import os from 'os';
-import path from 'path';
-import fs from 'fs';
+import os from 'node:os';
+import path from 'node:path';
+import fs from 'node:fs';
 const cacheDir = path.join(os.homedir(), '.astra');
 export function listOfAvailableVersions() {
     const versionsDir = path.join(cacheDir, 'versions');

@@ -1,6 +1,6 @@
-import { createHash } from "crypto";
-import path from "path";
-import fs from "fs/promises"; // ⬅️ Używamy wersji async `fs`
+import { createHash } from "node:crypto";
+import path from "node:path";
+import fs from "node:fs/promises"; // ⬅️ Używamy wersji async `fs`
 import got from "got";
 
 function hash(b: Buffer): string {
@@ -30,7 +30,7 @@ export default async function shasumMatch(pathToNode: string): Promise<boolean> 
         // return comparison
         return res[file] === hashOfNode;
     } catch (error) {
-        console.error(`❌ Error in shasumMatch():`, error);
+        console.error("❌ Error in shasumMatch():", error);
         return false;
     }
 }

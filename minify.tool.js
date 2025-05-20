@@ -1,5 +1,5 @@
 // @ts-check
-import fs from 'fs';
+import fs from 'node:fs';
 import signale from 'signale';
 import { minify } from 'terser';
 
