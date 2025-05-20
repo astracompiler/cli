@@ -19,12 +19,16 @@ It's aiming to compile servers (express, fastify) or CLIs (commander) so it's no
 
 For now it only compiles windows applications. (working on macOS and linux)
 ### Features
-- **Diffrent than the others** - Astra is a new approach to compiling JavaScript/TypeScript applications. It uses a different method than other compilers like pkg or nexe. 
+- **Delightful DX** - With [signale](https://npmjs.com/package/signale), [inquirer](https://www.npmjs.com/package/@inquirer/prompts) and [chalk](https://npmjs.com/package/chalk), Astra provides a great developer experience.
 - **Fast build time** - Powered by [esbuild](https://npmjs.com/package/esbuild), Astra ensures the fastest possible compilation speed.
-- **(Partial) Support for ECMAScript** - Unlike pkg, astra supports compiling ESM-based applications!
+- **Improved support for ECMAScript** - Astra supports compiling ESM-based applications, with workarounds for limitations in Node.js SEA.
 - **Standalone Executable** - Generates a single `.exe` or binary file that includes all dependencies.
-- **Custom Metadata** - Modify metadata (icon, name, version, etc.) of the generated executable.
-- **Esthetic CLI** - With [signale](https://npmjs.com/package/signale), [inquirer](https://www.npmjs.com/package/@inquirer/prompts) and [chalk](https://npmjs.com/package/chalk), Astra provides a great user experience.
+- **Make exe your own** - Modify metadata (icon, name, version, etc.) of the generated executable.
+- **Built-in Compression** - Reduces the size of the final executable.
+
+## Contributing
+🤝 I welcome pull requests! Every contribution will be reviewed and appreciated - even small fixes.
+
 ## Getting Started
 Install Astra globally using Yarn or npm:
 
@@ -61,9 +65,6 @@ astra --help
 2. Then astra is generating blob which will be injected into node.exe binary,
 3. Next astra is editing metadata of your binary (adding icon, copyright),
 4. And finally postject injects blob into final executable.
-
-## Contributing
-Contributions are welcome! Feel free to open issues or submit pull requests.
 
 ## License
 Astra is licensed under the MIT License.
