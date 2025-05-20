@@ -15,6 +15,8 @@ Astra is (probably) the best compiler available on npm.
 
 Average exe is ~70-80MB (depends on your code) so it's lighter than most compilers
 
+Using [upx](https://github.com/upx/upx) you can go down up to ~30MB
+
 It's aiming to compile servers (express, fastify) or CLIs (commander) so it's not replacement of electron. 
 
 For now it only compiles windows applications. (working on macOS and linux)
