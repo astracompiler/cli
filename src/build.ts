@@ -232,32 +232,38 @@ export default async function build({
 
 	log.success("Project built!");
 
+    // copy node to dist
+    fs.copyFileSync(getVersionPath(`${versionName}.exe`), nodePath);
+	fs.chmodSync(nodePath, 0o755);
+
 	// meta step 2
 	log.start(`${step(2)} Setting file metadata...`);
 
-	fs.copyFileSync(getVersionPath(`${versionName}.exe`), nodePath);
-	fs.chmodSync(nodePath, 0o755);
-	let iconpath: string | undefined;
-	try {
-		iconpath = path.resolve(config?.exe.icon);
-	} catch {
-		iconpath = undefined;
-	}
-	await rcedit(nodePath, {
-		icon: iconpath,
-		"version-string": {
-			CompanyName: config?.exe.companyName || os.userInfo().username,
-			FileDescription: config?.exe.fileDescription || "Node.js application",
-			ProductName: config?.exe.productName || "Node.js application",
-			LegalCopyright:
-				config?.exe.copyright ||
-				`© ${new Date().getFullYear()} Astra Compiler & Node.js contributors`,
-		},
-		"file-version": config?.exe.fileVersion || "1.0.0",
-		"product-version": config?.exe.productVersion || "1.0.0",
-	});
+	if (config?.modifyMetadata) {
+        let iconpath: string | undefined;
+        try {
+            iconpath = path.resolve(config?.exe.icon);
+        } catch {
+            iconpath = undefined;
+        }
+        await rcedit(nodePath, {
+            icon: iconpath,
+            "version-string": {
+                CompanyName: config?.exe.companyName || os.userInfo().username,
+                FileDescription: config?.exe.fileDescription || "Node.js application",
+                ProductName: config?.exe.productName || "Node.js application",
+                LegalCopyright:
+                    config?.exe.copyright ||
+                    `© ${new Date().getFullYear()} Astra Compiler & Node.js contributors`,
+            },
+            "file-version": config?.exe.fileVersion || "1.0.0",
+            "product-version": config?.exe.productVersion || "1.0.0",
+        });
 
-	log.success("File metadata set!");
+        log.success("File metadata set!");
+    } else {
+        log.info("Setting file metadata skipped...");
+    }
 
 	// blob step 3
 	log.start(`${step(3)} Generating blob...`);
