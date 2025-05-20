@@ -15,7 +15,7 @@
 		"astra": "node ./dist/astra.js",
 		"lint": "biome lint",
 		"fmt": "biome format --write",
-		"ts": "tsc"
+		"ts": "tsc && yarn minify"
 	},
 	"keywords": [
 		"astra",

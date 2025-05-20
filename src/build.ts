@@ -286,8 +286,10 @@ export default async function build({
 	);
 	if (nodeProcess.status !== 0) {
 		new log.Signale({ scope: "node" }).error(nodeProcess.stderr);
+        new log.Signale({ scope: "node" }).info(nodeProcess.stdout);
 		process.exit(1);
 	}
+    new log.Signale({ scope: "node" }).info(nodeProcess.stdout);
 	log.success("Blob generated!");
 	log.start(`${step(4)} Injecting blob...`);
 	await inject(nodePath, "NODE_SEA_BLOB", fs.readFileSync(blobPath), {
