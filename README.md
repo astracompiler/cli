@@ -27,7 +27,7 @@ For now it only compiles windows applications. (working on macOS and linux)
 - **Built-in Compression** - Reduces the size of the final executable.
 
 ## Contributing
-🤝 I welcome pull requests! Every contribution will be reviewed and appreciated — even small fixes.
+🤝 I welcome pull requests! Every contribution will be reviewed and appreciated - even small fixes.
 
 ## Getting Started
 Install Astra globally using Yarn or npm:
