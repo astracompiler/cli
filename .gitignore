@@ -4,3 +4,4 @@ yarn.lock
 astra.config.js
 dist-test
 node_modules
+.yarn
