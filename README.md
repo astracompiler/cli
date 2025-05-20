@@ -6,8 +6,8 @@
     <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/astra-cli">
     <img alt="NPM License" src="https://img.shields.io/npm/l/astra-cli">
     <img alt="NPM Version" src="https://img.shields.io/npm/v/astra-cli">
+    <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/astracompiler/cli/main.yml">
     <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/astracompiler/cli">
-
 </p>
 
 ## Why Astra?
