@@ -13,6 +13,8 @@
   "scripts": {
     "minify": "tsc && node ./minify.tool.js",
     "astra": "node ./dist/astra.js",
+    "lint": "biome lint",
+    "fmt": "biome format --write",
     "ts": "tsc"
   },
   "keywords": [
@@ -53,7 +55,7 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@eslint/js": "^9.22.0",
+    "@biomejs/biome": "^1.9.4",
     "@types/cli-progress": "^3.11.6",
     "@types/got": "^9.6.12",
     "@types/node": "^22.13.10",
@@ -61,10 +63,8 @@
     "@types/signale": "^1.4.7",
     "@types/temp": "^0.9.4",
     "@types/yargs": "^17.0.33",
-    "eslint": "^9.22.0",
     "terser": "^5.39.0",
-    "typescript": "^5.8.2",
-    "typescript-eslint": "^8.27.0"
+    "typescript": "^5.8.2"
   },
   "files": [
     "dist"
