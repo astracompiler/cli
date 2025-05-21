@@ -38,7 +38,7 @@ Install Astra globally using Yarn or npm:
 ```sh
 # npm 
 npm i -g astra-cli
-# yarn
+# yarn (classic)
 yarn global add astra-cli
 # pnpm
 pnpm add -g astra-cli
