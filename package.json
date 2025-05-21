@@ -1,6 +1,6 @@
 {
 	"name": "astra-cli",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"main": "./dist/astra.js",
 	"repository": "https://github.com/astracompiler/cli",
 	"author": "QwertyCode <167351530+QwertyCodeQC@users.noreply.github.com>",
