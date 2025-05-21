@@ -1,4 +1,4 @@
-<p align=center><img src="astra.png" width="100"/></p>
+<p align=center><img src="https://raw.githubusercontent.com/astracompiler/cli/main/astra.png" width="100"/></p>
 <h1 align=center>Astra</h1>
 <p align=center>🚀 Fast, reliable and easy-to-use js-to-exe compiler.</p>
 <p align=center><a href="https://astra-js.netlify.app">Docs</a> | <a href="https://npmjs.com/package/astra-cli">npm</a> | <a href="https://github.com/astracompiler/cli">GitHub</a></p>
@@ -14,6 +14,8 @@
 Astra is (probably) the best compiler available on npm.
 
 Average exe is ~70-80MB (depends on your code) so it's lighter than most compilers
+
+Using [upx](https://github.com/upx/upx) you can go down up to ~30MB
 
 It's aiming to compile servers (express, fastify) or CLIs (commander) so it's not replacement of electron. 
 
