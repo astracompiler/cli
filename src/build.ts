@@ -239,7 +239,7 @@ export default async function build({
 	// meta step 2
 	log.start(`${step(2)} Setting file metadata...`);
 	// TODO: fix when no config skips metadata
-	if (config.modifyMetadata) {
+	if (config?.modifyMetadata !== false) {
         let iconpath: string | undefined;
         try {
             iconpath = path.resolve(config?.exe.icon);
