@@ -10,21 +10,21 @@
 
 /** @type {Config} */
 export default {
-  outFile: 'dist/app.exe',
+	outFile: "dist/app.exe",
 
-  esbuild: {
-    // esbuild options (optional)
-  },
+	esbuild: {
+		// esbuild options (optional)
+	},
 
-  modifyMetadata: true, // modify metadata of the executable (useful if you have macOS and don't have wine installed)
+	modifyMetadata: true, // modify metadata of the executable (useful if you have macOS and don't have wine installed)
 
-  exe: {
-    companyName: 'Your Company',
-    productName: 'Your App',
-    fileDescription: 'Your App Description',
-    productVersion: '1.0.0',
-    fileVersion: '1.0.0.0',
-    icon: 'path/to/icon.ico',
-    copyright: 'Copyright © 2023 Your Company',
-  }
-}
+	exe: {
+		companyName: "Your Company",
+		productName: "Your App",
+		fileDescription: "Your App Description",
+		productVersion: "1.0.0",
+		fileVersion: "1.0.0.0",
+		icon: "path/to/icon.ico",
+		copyright: "Copyright © 2023 Your Company",
+	},
+};

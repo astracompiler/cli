@@ -15,7 +15,9 @@ temp.track();
 const __dirname = dirname(import.meta);
 
 if (semver.satisfies(process.version, "<20")) {
-	log.fatal(`You are using an unsupported version of Node.js (${process.version}). Please upgrade to v20 or later.`);
+	log.fatal(
+		`You are using an unsupported version of Node.js (${process.version}). Please upgrade to v20 or later.`,
+	);
 	process.exit(1);
 }
 

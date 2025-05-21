@@ -232,38 +232,38 @@ export default async function build({
 
 	log.success("Project built!");
 
-    // copy node to dist
-    fs.copyFileSync(getVersionPath(`${versionName}.exe`), nodePath);
+	// copy node to dist
+	fs.copyFileSync(getVersionPath(`${versionName}.exe`), nodePath);
 	fs.chmodSync(nodePath, 0o755);
 
 	// meta step 2
 	log.start(`${step(2)} Setting file metadata...`);
 	// TODO: fix when no config skips metadata
 	if (config?.modifyMetadata !== false) {
-        let iconpath: string | undefined;
-        try {
-            iconpath = path.resolve(config?.exe.icon);
-        } catch {
-            iconpath = undefined;
-        }
-        await rcedit(nodePath, {
-            icon: iconpath,
-            "version-string": {
-                CompanyName: config?.exe.companyName || os.userInfo().username,
-                FileDescription: config?.exe.fileDescription || "Node.js application",
-                ProductName: config?.exe.productName || "Node.js application",
-                LegalCopyright:
-                    config?.exe.copyright ||
-                    `© ${new Date().getFullYear()} Astra Compiler & Node.js contributors`,
-            },
-            "file-version": config?.exe.fileVersion || "1.0.0",
-            "product-version": config?.exe.productVersion || "1.0.0",
-        });
+		let iconpath: string | undefined;
+		try {
+			iconpath = path.resolve(config?.exe.icon);
+		} catch {
+			iconpath = undefined;
+		}
+		await rcedit(nodePath, {
+			icon: iconpath,
+			"version-string": {
+				CompanyName: config?.exe.companyName || os.userInfo().username,
+				FileDescription: config?.exe.fileDescription || "Node.js application",
+				ProductName: config?.exe.productName || "Node.js application",
+				LegalCopyright:
+					config?.exe.copyright ||
+					`© ${new Date().getFullYear()} Astra Compiler & Node.js contributors`,
+			},
+			"file-version": config?.exe.fileVersion || "1.0.0",
+			"product-version": config?.exe.productVersion || "1.0.0",
+		});
 
-        log.success("File metadata set!");
-    } else {
-        log.info("Setting file metadata skipped...");
-    }
+		log.success("File metadata set!");
+	} else {
+		log.info("Setting file metadata skipped...");
+	}
 
 	// blob step 3
 	log.start(`${step(3)} Generating blob...`);
@@ -280,18 +280,17 @@ export default async function build({
 
 	fs.writeFileSync(seaConfigPath, JSON.stringify(nodeBlobConfig));
 	const nodeProcess = spawnSync(
-		'node',
+		"node",
 		["--experimental-sea-config", seaConfigPath],
 		{ encoding: "utf-8" },
 	);
 	if (nodeProcess.status !== 0) {
 		new log.Signale({ scope: "node" }).error(nodeProcess.stderr);
-        new log.Signale({ scope: "node" }).info(nodeProcess.stdout);
+		new log.Signale({ scope: "node" }).info(nodeProcess.stdout);
 		process.exit(1);
 	}
-    new log.Signale({ scope: "node" }).info(nodeProcess.stdout);
+	new log.Signale({ scope: "node" }).info(nodeProcess.stdout);
 	log.success("Blob generated!");
-
 
 	// inject step 4
 	log.start(`${step(4)} Injecting blob...`);
