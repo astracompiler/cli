@@ -9,9 +9,16 @@ import { dirname } from "dirname-filename-esm";
 import temp from "temp";
 import fs from "node:fs";
 import os from "node:os";
+import semver from "semver";
 
 temp.track();
 const __dirname = dirname(import.meta);
+
+if (semver.satisfies(process.version, "<20")) {
+	log.fatal(`You are using an unsupported version of Node.js (${process.version}). Please upgrade to v20 or later.`);
+	process.exit(1);
+}
+
 if (!fs.existsSync(path.join(os.homedir(), ".astra", "versions"))) {
 	fs.mkdirSync(path.join(os.homedir(), ".astra", "versions"), {
 		recursive: true,
@@ -122,6 +129,15 @@ cli.command(
 		(await import("./build.js")).default(argv as unknown as BuildArgs);
 	},
 );
+cli.command(
+	"init",
+	"Initialize your project",
+	() => {},
+	async () => {
+		(await import("./init.js")).default();
+	},
+);
+
 const argv = await cli.parse();
 if (!argv._.length) {
 	cli.showHelp();

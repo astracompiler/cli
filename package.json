@@ -35,9 +35,6 @@
 	"bin": {
 		"astra": "./dist/astra.js"
 	},
-	"exports": {
-		"configtypes": "./dist/configtypes.js"
-	},
 	"dependencies": {
 		"@inquirer/prompts": "^7.3.3",
 		"chalk": "^5.4.1",

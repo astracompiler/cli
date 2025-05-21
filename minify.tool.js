@@ -3,8 +3,10 @@ import fs from "node:fs";
 import signale from "signale";
 import { minify } from "terser";
 
+const IGNORE = ["configtypes.js"]
+
 const files = fs.globSync("dist/**/*.js", {
-	exclude: (filename) => "configtypes.js" === filename,
+	exclude: (filename) => IGNORE.includes(filename),
 });
 for (const file of files) {
 	const code = fs.readFileSync(file, "utf8");

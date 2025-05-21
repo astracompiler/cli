@@ -238,8 +238,8 @@ export default async function build({
 
 	// meta step 2
 	log.start(`${step(2)} Setting file metadata...`);
-
-	if (config?.modifyMetadata) {
+	// TODO: fix when no config skips metadata
+	if (config.modifyMetadata) {
         let iconpath: string | undefined;
         try {
             iconpath = path.resolve(config?.exe.icon);
@@ -280,7 +280,7 @@ export default async function build({
 
 	fs.writeFileSync(seaConfigPath, JSON.stringify(nodeBlobConfig));
 	const nodeProcess = spawnSync(
-		getVersionPath(`${versionName}.exe`),
+		'node',
 		["--experimental-sea-config", seaConfigPath],
 		{ encoding: "utf-8" },
 	);
@@ -291,6 +291,9 @@ export default async function build({
 	}
     new log.Signale({ scope: "node" }).info(nodeProcess.stdout);
 	log.success("Blob generated!");
+
+
+	// inject step 4
 	log.start(`${step(4)} Injecting blob...`);
 	await inject(nodePath, "NODE_SEA_BLOB", fs.readFileSync(blobPath), {
 		sentinelFuse: "NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2",
