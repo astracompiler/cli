@@ -28,6 +28,7 @@ For now it only compiles windows applications. (working on macOS and linux)
 - **Delightful DX** - With [signale](https://npmjs.com/package/signale), [inquirer](https://www.npmjs.com/package/@inquirer/prompts) and [chalk](https://npmjs.com/package/chalk), Astra provides a great developer experience.
 - **Standalone Executable** - Generates a single `.exe` or binary file that includes all dependencies.
 - **Make exe your own** - Modify metadata (icon, name, version, etc.) of the generated executable.
+- **Future-proof** - Made with trusted constantly evolving tools.
 
 ## Contributing
 🤝 I welcome pull requests! Every contribution will be reviewed and appreciated - even small fixes.
@@ -38,7 +39,7 @@ Install Astra globally using Yarn or npm:
 ```sh
 # npm 
 npm i -g astra-cli
-# yarn
+# yarn (classic)
 yarn global add astra-cli
 # pnpm
 pnpm add -g astra-cli
