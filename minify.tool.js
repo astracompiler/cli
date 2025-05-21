@@ -3,7 +3,7 @@ import fs from "node:fs";
 import signale from "signale";
 import { minify } from "terser";
 
-const IGNORE = ["configtypes.js"]
+const IGNORE = ["config.js"]
 
 const files = fs.globSync("dist/**/*.js", {
 	exclude: (filename) => IGNORE.includes(filename),
