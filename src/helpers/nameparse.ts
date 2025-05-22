@@ -7,13 +7,19 @@ export default function nameparse(name: string): {
 	isLTS: boolean;
 	version: string;
 } {
-	let string = path.parse(name).name;
+	let string: string;
+	if (name.endsWith(".exe")) {
+		string = path.parse(name).name;
+	} else {
+		string = name;
+	}
 	string = string.replace("node_", "");
 	const data = string.split("-");
 	const version = data[0];
 	const os = data[1];
 	const arch = data[2];
 	const isLTS = data[3] === "lts";
+	// e.g. node_v20.18.3-win-arm64-lts
 	return {
 		arch: arch as "x86" | "x64" | "arm64",
 		os: os as "win" | "linux" | "macos",

@@ -1082,7 +1082,7 @@ __metadata:
     temp: "npm:^0.9.4"
     terser: "npm:^5.39.0"
     typescript: "npm:^5.8.2"
-    vitest: "npm:^3.1.0"
+    vitest: "npm:^3.1.4"
     yargs: "npm:^17.7.2"
   bin:
     astra: ./dist/astra.js
@@ -3365,7 +3365,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest@npm:^3.1.0":
+"vitest@npm:^3.1.4":
   version: 3.1.4
   resolution: "vitest@npm:3.1.4"
   dependencies:

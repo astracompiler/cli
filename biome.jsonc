@@ -10,7 +10,7 @@
 		"ignore": []
 	},
 	"formatter": {
-		"ignore": ["dist"],
+		"ignore": ["dist", "temp"],
 		"enabled": true,
 		"indentStyle": "tab"
 	},
@@ -18,7 +18,7 @@
 		"enabled": true
 	},
 	"linter": {
-		"ignore": ["dist", "*.test.(js|ts)"],
+		"ignore": ["dist", "*.test.(js|ts)", "temp"],
 		"enabled": true,
 		"rules": {
 			"recommended": true

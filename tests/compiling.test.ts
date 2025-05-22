@@ -1,0 +1,80 @@
+import { execSync, spawnSync } from "node:child_process";
+import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
+import fs from "node:fs";
+import build from "../src/build.js";
+
+beforeAll(() => {
+	execSync("yarn ts");
+	fs.mkdirSync("temp");
+	fs.writeFileSync(
+		"temp/test.esm.ts",
+		"import log from'console';log('Hello world!');",
+	);
+	fs.writeFileSync(
+		"temp/test.cjs.ts",
+		"const {log}=require('console');log('Hello world!');",
+	);
+	fs.writeFileSync("temp/im-not-a-js-ts-file", "Hello world!");
+});
+
+describe(
+	"compiling",
+	() => {
+		it("esm compiling", async () => {
+			await build({
+				entry: "temp/test.esm.ts",
+				outDir: "temp",
+				node: "node_v22.15.1-win-x64",
+				disShasumCheck: false,
+			});
+		});
+
+		it("cjs compiling", async () => {
+			await build({
+				entry: "temp/test.cjs.ts",
+				outDir: "temp",
+				node: "node_v22.15.1-win-x64",
+				disShasumCheck: false,
+			});
+		});
+
+		it("should throw do not exists error", async () => {
+			const spy = vi.spyOn(process, "exit").mockImplementation((code) => {
+				throw new Error(`exit ${code}`);
+			});
+
+			await expect(
+				build({
+					entry: "temp/i-do-not-exist.ts",
+					outDir: "temp",
+					node: "node_v22.15.1-win-x64",
+					disShasumCheck: false,
+				}),
+			).rejects.toThrow("exit 1");
+
+			spy.mockRestore();
+		});
+
+		it("should throw not a js/ts file error", async () => {
+			const spy = vi.spyOn(process, "exit").mockImplementation((code) => {
+				throw new Error(`exit ${code}`);
+			});
+
+			await expect(
+				build({
+					entry: "temp/im-not-a-js-ts-file",
+					outDir: "temp",
+					node: "node_v22.15.1-win-x64",
+					disShasumCheck: false,
+				}),
+			).rejects.toThrow("exit 1");
+
+			spy.mockRestore();
+		});
+	},
+	1000 * 60,
+);
+
+afterAll(() => {
+	fs.rmSync("temp", { recursive: true, force: true });
+});
