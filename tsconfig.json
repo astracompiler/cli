@@ -108,5 +108,5 @@
 		// "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
 		"skipLibCheck": true /* Skip type checking all .d.ts files. */
 	},
-	"exclude": ["*.tool.js", "*.test.js", "dist", "node_modules", "*.config.js"]
+	"exclude": ["copmiletest.js", "*.tool.js", "dist", "node_modules", "*.config.js"]
 }

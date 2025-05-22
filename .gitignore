@@ -4,3 +4,4 @@ astra.config.js
 dist-test
 node_modules
 .yarn
+compiletest.js
