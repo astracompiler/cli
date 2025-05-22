@@ -2,7 +2,11 @@
 	"name": "astra-cli",
 	"version": "1.1.0",
 	"main": "./dist/astra.js",
-	"repository": "https://github.com/astracompiler/cli",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/astracompiler/cli"
+	},
+	"homepage": "https://astra-js.netlify.app",
 	"author": "QwertyCode <167351530+QwertyCodeQC@users.noreply.github.com>",
 	"license": "MIT",
 	"type": "module",
