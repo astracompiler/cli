@@ -1,4 +1,4 @@
-import { execSync, spawnSync } from "node:child_process";
+import { execSync } from "node:child_process";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import fs from "node:fs";
 import build from "../src/build.js";
@@ -7,6 +7,7 @@ import install from "../src/install.js";
 beforeAll(async () => {
 	execSync("yarn ts");
 	fs.mkdirSync("temp");
+	fs.mkdirSync("temp/hello-i-am-a-folder");
 	fs.writeFileSync(
 		"temp/test.esm.ts",
 		"import log from'console';log('Hello world!');",
@@ -72,6 +73,24 @@ describe(
 			await expect(
 				build({
 					entry: "temp/im-not-a-js-ts-file",
+					outDir: "temp",
+					node: "node_v22.15.1-win-x64",
+					disShasumCheck: false,
+					noMetadata: true,
+				}),
+			).rejects.toThrow("exit 1");
+
+			spy.mockRestore();
+		});
+
+		it("should throw not a file error", async () => {
+			const spy = vi.spyOn(process, "exit").mockImplementation((code) => {
+				throw new Error(`exit ${code}`);
+			});
+
+			await expect(
+				build({
+					entry: "temp/hello-i-am-a-folder",
 					outDir: "temp",
 					node: "node_v22.15.1-win-x64",
 					disShasumCheck: false,
