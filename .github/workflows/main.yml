@@ -31,5 +31,8 @@ jobs:
       - name: Run ts script
         run: yarn ts
       
+      - name: Download node file
+        run: curl -L "https://github.com/astracompiler/binaries/releases/download/v2/node_v22.15.1-win-x64-lts.exe" -o ~/.astra/versions/node_v22.15.1-win-x64-lts.exe
+      
       - name: Run tests
         run: yarn test
