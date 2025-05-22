@@ -3,11 +3,11 @@
 <p align=center>🚀 Fast, reliable and easy-to-use js-to-exe compiler.</p>
 <p align=center><a href="https://astra-js.netlify.app">Docs</a> | <a href="https://npmjs.com/package/astra-cli">npm</a> | <a href="https://github.com/astracompiler/cli">GitHub</a></p>
 <p align=center>
-    <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/astra-cli">
-    <img alt="NPM License" src="https://img.shields.io/npm/l/astra-cli">
-    <img alt="NPM Version" src="https://img.shields.io/npm/v/astra-cli">
-    <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/astracompiler/cli/main.yml">
-    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/astracompiler/cli">
+    <a href="#"><img alt="NPM Downloads" src="https://img.shields.io/npm/dm/astra-cli"></a>
+    <a href="https://github.com/astracompiler/cli/blob/main/LICENSE"><img alt="NPM License" src="https://img.shields.io/npm/l/astra-cli"></a>
+    <a href="https://npmjs.com/package/astra-cli"><img alt="NPM Version" src="https://img.shields.io/npm/v/astra-cli"></a>
+    <a href="https://github.com/astracompiler/cli/actions"><img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/astracompiler/cli/main.yml"></a>
+    <a href="https://github.com/astracompiler/cli/"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/astracompiler/cli"></a>
 </p>
 
 ## Why Astra?
