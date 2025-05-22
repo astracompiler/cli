@@ -2,8 +2,9 @@ import { execSync, spawnSync } from "node:child_process";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import fs from "node:fs";
 import build from "../src/build.js";
+import install from "../src/install.js";
 
-beforeAll(() => {
+beforeAll(async () => {
 	execSync("yarn ts");
 	fs.mkdirSync("temp");
 	fs.writeFileSync(
@@ -15,6 +16,8 @@ beforeAll(() => {
 		"const {log}=require('console');log('Hello world!');",
 	);
 	fs.writeFileSync("temp/im-not-a-js-ts-file", "Hello world!");
+    // install test node version
+    await install({ ver: "node_v22.15.1-win-x64" });
 });
 
 describe(
