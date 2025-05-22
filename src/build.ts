@@ -33,7 +33,13 @@ export default async function build({
 	disShasumCheck,
 	entry,
 	noMetadata,
-}: { outDir: string; node: string; disShasumCheck: boolean; entry: string; noMetadata: boolean }) {
+}: {
+	outDir: string;
+	node: string;
+	disShasumCheck: boolean;
+	entry: string;
+	noMetadata: boolean;
+}) {
 	if (!entry) {
 		try {
 			const pack = await readPackage();
