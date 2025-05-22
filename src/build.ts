@@ -240,7 +240,12 @@ export default async function build({
 	// meta step 2
 	log.start(`${step(2)} Setting file metadata...`);
 	// TODO: fix when no config skips metadata
-	if (config?.modifyMetadata !== false || !noMetadata) {
+
+	if (noMetadata === true) {
+		log.info("Setting file metadata skipped...");
+	} else if (config?.modifyMetadata === false) {
+		log.info("Setting file metadata skipped...");
+	} else {
 		let iconpath: string | undefined;
 		try {
 			iconpath = path.resolve(config?.exe.icon);
@@ -262,8 +267,6 @@ export default async function build({
 		});
 
 		log.success("File metadata set!");
-	} else {
-		log.info("Setting file metadata skipped...");
 	}
 
 	// blob step 3
@@ -306,6 +309,6 @@ export default async function build({
 		`You can now run your project by typing ${chalk.yellowBright(`\"${nodePath}\"`)}`,
 	);
 	log.info(
-		`Wanna use this preset later? Copy this command: \n${chalk.yellowBright(`astra build "${path.resolve(entry)}" -o "${nodePath}" -n "${versionName}" ${disShasumCheck ? "--disShasumCheck" : ""}`)}`,
+		`Wanna use this preset later? Copy this command: \n${chalk.yellowBright(`astra build "${path.resolve(entry)}" -o "${nodePath}" -n "${versionName}" ${disShasumCheck ? "--disShasumCheck" : ""} ${noMetadata ? "--noMetadata" : ""}`)}`,
 	);
 }

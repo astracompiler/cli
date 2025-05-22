@@ -122,6 +122,7 @@ cli.command(
 		y.option("noMetadata", {
 			describe: "Disable exe's metadata editing",
 			type: "boolean",
+			default: false,
 		});
 	},
 	async (argv) => {
