@@ -1939,13 +1939,13 @@ __metadata:
   linkType: hard
 
 "postject@npm:^1.0.0-alpha.5":
-  version: 1.0.0-alpha.5
-  resolution: "postject@npm:1.0.0-alpha.5"
+  version: 1.0.0-alpha.6
+  resolution: "postject@npm:1.0.0-alpha.6"
   dependencies:
     commander: "npm:^9.4.0"
   bin:
     postject: dist/cli.js
-  checksum: 10c0/9f4ab76fa6276cf02aec310dfda8b7e122c0647507c102339b230793a60d816bed5fe50e23883ad0108c04bd02f2e97a333bdb502eb3f7f038e5138efbe72a11
+  checksum: 10c0/7d5c5ffdb63190d48cc4b4b617ef2fa144f2bfd5f035231af08a8d7465298ed2a08ee4b354df198b4c96b32d3d873e562b6d23caacd80eb0ec722d81381e4a3e
   languageName: node
   linkType: hard
 
