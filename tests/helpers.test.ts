@@ -3,12 +3,12 @@ import nameparse, { generate, isLTS } from "../src/helpers/nameparse.js";
 import { isVersionInstalled } from "../src/helpers/cache.js";
 
 describe("helpers", () => {
-	it("should return it's LTS version", () => {
-		expect(isLTS("node_v22.15.1-win-x64")).resolves.toBe(true);
+	it("should return it's LTS version", async () => {
+		await expect(isLTS("node_v22.15.1-win-x64")).resolves.toBe(true);
 	});
 
-	it("should return it's not LTS version", () => {
-		expect(isLTS("node_v23.11.1-win-x64")).resolves.toBe(false);
+	it("should return it's not LTS version", async () => {
+		await expect(isLTS("node_v23.11.1-win-x64")).resolves.toBe(false);
 	});
 
 	it("should return valid object", () => {
