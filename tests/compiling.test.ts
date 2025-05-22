@@ -32,6 +32,7 @@ describe(
 				outDir: "temp",
 				node: "node_v22.15.1-win-x64",
 				disShasumCheck: false,
+				noMetadata: true,
 			});
 		});
 
@@ -41,6 +42,7 @@ describe(
 				outDir: "temp",
 				node: "node_v22.15.1-win-x64",
 				disShasumCheck: false,
+				noMetadata: true,
 			});
 		});
 
@@ -55,6 +57,7 @@ describe(
 					outDir: "temp",
 					node: "node_v22.15.1-win-x64",
 					disShasumCheck: false,
+                    noMetadata: true,
 				}),
 			).rejects.toThrow("exit 1");
 
@@ -72,6 +75,7 @@ describe(
 					outDir: "temp",
 					node: "node_v22.15.1-win-x64",
 					disShasumCheck: false,
+                    noMetadata: true,
 				}),
 			).rejects.toThrow("exit 1");
 

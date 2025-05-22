@@ -32,7 +32,8 @@ export default async function build({
 	node,
 	disShasumCheck,
 	entry,
-}: { outDir: string; node: string; disShasumCheck: boolean; entry: string }) {
+	noMetadata,
+}: { outDir: string; node: string; disShasumCheck: boolean; entry: string; noMetadata: boolean }) {
 	if (!entry) {
 		try {
 			const pack = await readPackage();
@@ -239,7 +240,7 @@ export default async function build({
 	// meta step 2
 	log.start(`${step(2)} Setting file metadata...`);
 	// TODO: fix when no config skips metadata
-	if (config?.modifyMetadata !== false) {
+	if (config?.modifyMetadata !== false || !noMetadata) {
 		let iconpath: string | undefined;
 		try {
 			iconpath = path.resolve(config?.exe.icon);
