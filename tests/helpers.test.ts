@@ -3,10 +3,10 @@ import nameparse, { generate, isLTS } from "../src/helpers/nameparse.js";
 import { isVersionInstalled } from "../src/helpers/cache.js";
 import install from "../src/install.js";
 
-beforeAll(async () => {
-    // install test node version
-    await install({ ver: "node_v22.15.1-win-x64" });
-})
+// beforeAll(async () => {
+//     // install test node version
+//     await install({ ver: "node_v22.15.1-win-x64" });
+// })
 
 describe("helpers", () => {
 	it("should return it's LTS version", () => {
