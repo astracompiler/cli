@@ -119,6 +119,10 @@ cli.command(
 				"Disable node.exe shasum check (only use if you know what you're doing!)",
 			type: "boolean",
 		});
+		y.option("noMetadata", {
+			describe: "Disable exe's metadata editing",
+			type: "boolean",
+		});
 	},
 	async (argv) => {
 		interface BuildArgs {
@@ -127,6 +131,7 @@ cli.command(
 			node: string;
 			disShasumCheck: boolean;
 			[key: string]: unknown;
+			noMetadata: boolean;
 		}
 		(await import("./build.js")).default(argv as unknown as BuildArgs);
 	},
