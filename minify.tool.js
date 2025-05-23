@@ -11,17 +11,17 @@ const files = fs.globSync("dist/**/*.js", {
 for (const file of files) {
 	const code = fs.readFileSync(file, "utf8");
 	const minified = await minify(code, {
-		module: true, // Włącza obsługę ESM (import/export)
-		ecma: 2020, // Pozwala na top-level await i nowoczesne funkcje
+		module: true,
+		ecma: 2020,
 		compress: {
-			module: true, // Optymalizacje specyficzne dla ESM
-			toplevel: true, // Usuwa nieużywany kod na najwyższym poziomie
+			module: true,
+			toplevel: true,
 		},
 		format: {
-			comments: false, // Usuwa komentarze
+			comments: false,
 		},
 	});
-	// @ts-ignore
+	// @ts-expect-error;
 	fs.writeFileSync(file, Buffer.from(minified.code));
 }
 signale.success("Minified all files!");

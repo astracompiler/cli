@@ -2,7 +2,7 @@ import { dirname } from "dirname-filename-esm";
 import fs from "node:fs";
 import log from "signale";
 
-export default async function init() {
+export default function init() {
 	log.info("Initializing your project...");
 	if (fs.existsSync("astra.config.js")) {
 		log.success("Project already initialized!");

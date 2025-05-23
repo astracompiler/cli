@@ -312,7 +312,7 @@ export default async function build({
 	console.log();
 	log.complete("Project built successfully! 🚀");
 	log.info(
-		`You can now run your project by typing ${chalk.yellowBright(`\"${nodePath}\"`)}`,
+		`You can now run your project by typing ${chalk.yellowBright(`"${nodePath}"`)}`,
 	);
 	log.info(
 		`Wanna use this preset later? Copy this command: \n${chalk.yellowBright(`astra build "${path.resolve(entry)}" -o "${nodePath}" -n "${versionName}" ${disShasumCheck ? "--disShasumCheck" : ""} ${noMetadata ? "--noMetadata" : ""}`)}`,
