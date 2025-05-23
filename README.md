@@ -7,6 +7,7 @@
     <a href="https://github.com/astracompiler/cli/blob/main/LICENSE"><img alt="NPM License" src="https://img.shields.io/npm/l/astra-cli"></a>
     <a href="https://npmjs.com/package/astra-cli"><img alt="NPM Version" src="https://img.shields.io/npm/v/astra-cli"></a>
     <a href="https://github.com/astracompiler/cli/actions"><img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/astracompiler/cli/main.yml"></a>
+    <a href="https://app.netlify.com/projects/astra-js/deploys"><img alt="Netlify status" src="https://api.netlify.com/api/v1/badges/1737b126-dce7-4d82-9b76-8743c4ec3b67/deploy-status"/></a>
     <a href="https://github.com/astracompiler/cli/"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/astracompiler/cli"></a>
 </p>
 
