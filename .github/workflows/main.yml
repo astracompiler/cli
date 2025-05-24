@@ -7,7 +7,82 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  test-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Enable corepack and activate yarn
+        run: corepack enable && corepack prepare yarn --activate
+
+      - name: Install deps
+        run: yarn install --immutable
+      
+      - name: Download node file
+        run: |
+          mkdir -p "$HOME/.astra/versions"
+          curl -L "https://github.com/astracompiler/binaries/releases/download/v2/node_v22.15.1-win-x64-lts.exe" -o "$HOME/.astra/versions/node_v22.15.1-win-x64-lts.exe"
+
+      - name: Run tests
+        run: yarn test
+  test-ubuntu:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Enable corepack and activate yarn
+        run: corepack enable && corepack prepare yarn --activate
+
+      - name: Install deps
+        run: yarn install --immutable
+
+      - name: Download node file
+        run: |
+          mkdir -p ~/.astra/versions
+          curl -L "https://github.com/astracompiler/binaries/releases/download/v2/node_v22.15.1-win-x64-lts.exe" -o ~/.astra/versions/node_v22.15.1-win-x64-lts.exe
+
+      - name: Run tests
+        run: yarn test
+  test-macos:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Enable corepack and activate yarn
+        run: corepack enable && corepack prepare yarn --activate
+
+      - name: Install deps
+        run: yarn install --immutable
+
+      - name: Download node file
+        run: |
+          mkdir -p ~/.astra/versions
+          curl -L "https://github.com/astracompiler/binaries/releases/download/v2/node_v22.15.1-win-x64-lts.exe" -o ~/.astra/versions/node_v22.15.1-win-x64-lts.exe
+
+      - name: Run tests
+        run: yarn test
+  lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,11 +105,3 @@ jobs:
       
       - name: Run ts script
         run: yarn ts
-      
-      - name: Download node file
-        run: |
-          mkdir -p ~/.astra/versions
-          curl -L "https://github.com/astracompiler/binaries/releases/download/v2/node_v22.15.1-win-x64-lts.exe" -o ~/.astra/versions/node_v22.15.1-win-x64-lts.exe
-      
-      - name: Run tests
-        run: yarn test
