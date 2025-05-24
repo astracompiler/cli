@@ -109,12 +109,13 @@
 		"skipLibCheck": true /* Skip type checking all .d.ts files. */
 	},
 	"exclude": [
-		"copmiletest.js",
+		"compiletest.js",
 		"tests",
 		"*.tool.js",
 		"dist",
 		"node_modules",
 		"*.config.js",
-		"temp"
+		"temp",
+		"vitest.config.ts",
 	]
 }
