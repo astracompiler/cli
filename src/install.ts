@@ -11,7 +11,11 @@ import got, { RequestError } from "got";
 export default async function install({ ver }: { ver: string }) {
 	let versionName: string;
 	try {
-		await got("https://google.com");
+		await got("https://google.com", {
+			headers: {
+				"User-Agent": "AstraCLI",
+			},
+		});
 	} catch (err) {
 		if (err instanceof RequestError && err.code === "ENOTFOUND") {
 			log.error(
@@ -22,6 +26,11 @@ export default async function install({ ver }: { ver: string }) {
 	}
 	const res = (await got(
 		"https://api.github.com/repos/astracompiler/binaries/releases/latest",
+		{
+			headers: {
+				"User-Agent": "AstraCLI",
+			},
+		},
 	).json()) as Record<string, unknown>;
 	if (ver) {
 		const regex = /^node_v(\d+\.\d+\.\d+)-([a-z]+)-(x86|x64|arm64)$/;
@@ -87,6 +96,9 @@ export default async function install({ ver }: { ver: string }) {
 		}
 		const response = got.stream(asset.browser_download_url, {
 			method: "GET",
+			headers: {
+				"User-Agent": "AstraCLI",
+			},
 		});
 		response.on("data", () => {
 			bar.update(Number((response.downloadProgress.percent * 100).toFixed(0)));

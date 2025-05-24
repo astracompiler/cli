@@ -34,6 +34,11 @@ export async function isLTS(name: string): Promise<boolean> {
 	try {
 		const response = await got(
 			"https://api.github.com/repos/astracompiler/binaries/releases/latest",
+			{
+				headers: {
+					"User-Agent": "AstraCLI",
+				},
+			},
 		).json();
 		const latestRelease = response as Record<string, unknown>;
 		const assets = Array.isArray(

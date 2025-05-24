@@ -91,7 +91,9 @@ cli.command(
 		});
 	},
 	async (argv) => {
-		void (await import("./install.js")).default(argv as unknown as { ver: string });
+		void (await import("./install.js")).default(
+			argv as unknown as { ver: string },
+		);
 	},
 );
 

@@ -79,6 +79,11 @@ export default async function build({
 	try {
 		await got(
 			"https://api.github.com/repos/astracompiler/binaries/releases/latest",
+			{
+				headers: {
+					"User-Agent": "AstraCLI",
+				},
+			},
 		);
 	} catch (err) {
 		if (err instanceof RequestError && err.code === "ENOTFOUND") {
@@ -89,6 +94,11 @@ export default async function build({
 	if (!offline) {
 		res = await got(
 			"https://api.github.com/repos/astracompiler/binaries/releases/latest",
+			{
+				headers: {
+					"User-Agent": "AstraCLI",
+				},
+			},
 		).json();
 	} else {
 		res = { assets: listOfAvailableVersions().map((v) => ({ name: v })) };

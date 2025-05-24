@@ -8,6 +8,11 @@ export default async function versions() {
 	try {
 		res = (await got(
 			"https://api.github.com/repos/astracompiler/binaries/releases/latest",
+			{
+				headers: {
+					"User-Agent": "AstraCLI",
+				},
+			},
 		).json()) as Record<string, unknown>;
 	} catch (err) {
 		if (err instanceof RequestError) {

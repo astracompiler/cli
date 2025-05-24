@@ -14,6 +14,11 @@ export default async function shasumMatch(
 		// get shasums.json
 		const res: Record<string, unknown> = await got(
 			"https://raw.githubusercontent.com/astracompiler/binaries/refs/heads/main/shasums.json",
+			{
+				headers: {
+					"User-Agent": "AstraCLI",
+				},
+			},
 		).json();
 
 		// getting file name
