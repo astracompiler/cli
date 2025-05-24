@@ -25,6 +25,11 @@ jobs:
       - name: Install deps
         run: yarn install --immutable
 
+      - name: Download node file
+        run: |
+          mkdir -p ~/.astra/versions
+          curl -L "https://github.com/astracompiler/binaries/releases/download/v2/node_v22.15.1-win-x64-lts.exe" -o ~/.astra/versions/node_v22.15.1-win-x64-lts.exe
+
       - name: Run tests
         run: yarn test
   test-ubuntu:
@@ -45,6 +50,11 @@ jobs:
       - name: Install deps
         run: yarn install --immutable
 
+      - name: Download node file
+        run: |
+          mkdir -p ~/.astra/versions
+          curl -L "https://github.com/astracompiler/binaries/releases/download/v2/node_v22.15.1-win-x64-lts.exe" -o ~/.astra/versions/node_v22.15.1-win-x64-lts.exe
+
       - name: Run tests
         run: yarn test
   test-macos:
@@ -64,6 +74,11 @@ jobs:
 
       - name: Install deps
         run: yarn install --immutable
+
+      - name: Download node file
+        run: |
+          mkdir -p ~/.astra/versions
+          curl -L "https://github.com/astracompiler/binaries/releases/download/v2/node_v22.15.1-win-x64-lts.exe" -o ~/.astra/versions/node_v22.15.1-win-x64-lts.exe
 
       - name: Run tests
         run: yarn test
