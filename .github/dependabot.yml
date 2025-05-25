@@ -6,6 +6,6 @@ updates:
       interval: "daily"
     open-pull-requests-limit: 10
     commit-message:
-      prefix: "deps"
+      prefix: "chore"
     allow:
       - dependency-type: "all"
