@@ -5,10 +5,11 @@ export default defineConfig({
       provider: 'v8',
       exclude: [
         "src/config.js",
+        "compiletest.js",
+        "astra.config.js",
+        "minify.tool.js",
         "dist",
-        "*",
-        "!src"
       ]
-    }
+    },
   },
 })
