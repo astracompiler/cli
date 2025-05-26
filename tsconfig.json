@@ -117,5 +117,6 @@
 		"*.config.js",
 		"temp",
 		"vitest.config.ts",
+		"coverage"
 	]
 }

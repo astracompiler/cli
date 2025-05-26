@@ -3,6 +3,8 @@ import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import fs from "node:fs";
 import build from "../src/build.js";
 import install from "../src/install.js";
+import versions from "../src/versions.js";
+import init from '../src/init.js';
 
 beforeAll(async () => {
 	execSync("yarn ts");
@@ -100,6 +102,21 @@ describe(
 
 			spy.mockRestore();
 		});
+
+		it("should show avaliable node versions", async () => {
+			await expect(
+				versions()
+			).resolves.not.toThrow();
+		})
+
+		it("should create config file", async () => {
+			const spy = vi.spyOn(process, "cwd").mockReturnValue("temp");
+			const spy2 = vi.spyOn(process, "exit").mockImplementation((() => {}) as typeof process.exit);
+			expect(() => init()).not.toThrow();
+			spy.mockRestore();
+			spy2.mockRestore();
+		})
+
 	},
 	1000 * 60,
 );
