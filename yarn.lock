@@ -41,17 +41,17 @@ __metadata:
   linkType: hard
 
 "@babel/parser@npm:^7.25.4":
-  version: 7.27.2
-  resolution: "@babel/parser@npm:7.27.2"
+  version: 7.27.3
+  resolution: "@babel/parser@npm:7.27.3"
   dependencies:
-    "@babel/types": "npm:^7.27.1"
+    "@babel/types": "npm:^7.27.3"
   bin:
     parser: ./bin/babel-parser.js
-  checksum: 10c0/3c06692768885c2f58207fc8c2cbdb4a44df46b7d93135a083f6eaa49310f7ced490ce76043a2a7606cdcc13f27e3d835e141b692f2f6337a2e7f43c1dbb04b4
+  checksum: 10c0/d96363c7548710ab9c28649cee752e2d0713ed25bf910923da45d2fbc67fed5bbdfb867274fec7d72437f4e910577d27c04e160da52d95f1b63fdf0b19035d26
   languageName: node
   linkType: hard
 
-"@babel/types@npm:^7.25.4, @babel/types@npm:^7.27.1":
+"@babel/types@npm:^7.25.4, @babel/types@npm:^7.27.3":
   version: 7.27.3
   resolution: "@babel/types@npm:7.27.3"
   dependencies:
