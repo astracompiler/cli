@@ -21,7 +21,7 @@
 		"fmt": "biome format --write",
 		"ts": "rimraf dist && tsc && yarn minify",
 		"pb": "yarn lint && yarn fmt && yarn ts && yarn npm publish",
-		"test": "vitest run"
+		"test": "vitest run --coverage"
 	},
 	"keywords": [
 		"astra",
