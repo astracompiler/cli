@@ -5,8 +5,16 @@ import build from "../src/build.js";
 import install from "../src/install.js";
 import versions from "../src/versions.js";
 import init from '../src/init.js';
+import got from "got";
 
 beforeAll(async () => {
+	try {
+		if ((await got("https://api.github.com")).statusCode !== 200) {
+			throw new Error("GitHub API is not reachable. Rate limit exceeded or network issue.");
+		}
+	} catch (error) {
+		throw new Error("GitHub API is not reachable. Rate limit exceeded or network issue.");
+	}
 	execSync("yarn ts");
 	fs.mkdirSync("temp");
 	fs.mkdirSync("temp/hello-i-am-a-folder");
@@ -66,6 +74,24 @@ describe(
 
 			spy.mockRestore();
 		});
+		it("should throw error if entry is not defined", async () => {
+			const spy = vi.spyOn(process, "exit").mockImplementation((code) => {
+				throw new Error(`exit ${code}`);
+			});
+
+			await expect(
+				build({
+					// @ts-ignore
+					entry: undefined,
+					outDir: "temp",
+					node: "node_v99.99.99-win-x64",
+					disShasumCheck: false,
+					noMetadata: true,
+				}),
+			).rejects.toThrow("exit 1");
+
+			spy.mockRestore();
+		});
 
 		it("should throw not a js/ts file error", async () => {
 			const spy = vi.spyOn(process, "exit").mockImplementation((code) => {
@@ -113,6 +139,25 @@ describe(
 			const spy = vi.spyOn(process, "cwd").mockReturnValue("temp");
 			const spy2 = vi.spyOn(process, "exit").mockImplementation((() => {}) as typeof process.exit);
 			expect(() => init()).not.toThrow();
+			if (!fs.existsSync("temp/astra.config.js")) {
+				expect(true).toBe(false); // Crash if config file does not exist
+			}
+			fs.rmSync("temp/astra.config.js");
+			spy.mockRestore();
+			spy2.mockRestore();
+
+		})
+
+		it("should throw error if config file already exists", async () => {
+			const spy = vi.spyOn(process, "cwd").mockReturnValue("temp");
+			const spy2 = vi.spyOn(process, "exit").mockImplementation((code) => {
+				throw new Error(`exit ${code}`);
+			});
+
+			expect(() => init()).not.toThrow();
+			expect(() => init()).toThrow();
+
+			fs.rmSync("temp/astra.config.js");
 			spy.mockRestore();
 			spy2.mockRestore();
 		})

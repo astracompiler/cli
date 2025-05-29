@@ -1,6 +1,17 @@
-import { describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 import nameparse, { generate, isLTS } from "../src/helpers/nameparse.js";
 import { isVersionInstalled } from "../src/helpers/cache.js";
+import { got } from "got";
+
+beforeAll(async () => {
+	try {
+		if ((await got("https://api.github.com")).statusCode !== 200) {
+			throw new Error("GitHub API is not reachable. Rate limit exceeded or network issue.");
+		}
+	} catch (error) {
+		throw new Error("GitHub API is not reachable. Rate limit exceeded or network issue.");
+	}
+})
 
 describe("helpers", () => {
 	it("should return it's LTS version", async () => {
