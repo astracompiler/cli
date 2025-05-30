@@ -155,7 +155,10 @@ cli.command(
 
 (async () => {
 	await cli.parse();
-})();
+})().catch((error) => {
+	log.fatal(error);
+	process.exit(1);
+});
 // process.on('exit', () => {
 //     new signale.Signale({ types: { done: {badge: "⌚", label: "done", color: "blueBright" } } }).done(`Done in ${((Date.now() - startTime) / 1000).toFixed(2)}s`)
 // })
