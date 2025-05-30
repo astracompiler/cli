@@ -1,5 +1,6 @@
 import got from "got";
 import path from "node:path";
+import { cache } from "../astra.js";
 
 export default function nameparse(name: string): {
 	arch: "x86" | "x64" | "arm64";
@@ -37,6 +38,12 @@ export async function isLTS(name: string): Promise<boolean> {
 			{
 				headers: {
 					"User-Agent": "AstraCLI",
+				},
+				cache: {
+					get: (key: string) => cache.get(key),
+					set: (key: string, value: unknown) => cache.set(key, value),
+					delete: (key: string) => cache.delete(key),
+					clear: () => cache.clear(),
 				},
 			},
 		).json();

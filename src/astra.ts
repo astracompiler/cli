@@ -40,13 +40,22 @@ process.on("uncaughtException", (error) => {
 });
 
 // Setup cache
+if (!fs.existsSync(path.join(os.homedir(), ".astra", "cache.json"))) {
+	fs.writeFileSync(
+		path.join(os.homedir(), ".astra", "cache.json"),
+		"{}",
+	)
+}
 export const cache = new Keyv({
-  store: new KeyvFile({
-    filename: path.join(os.homedir(), ".astra", "cache.json"), // Path to the cache file
-    writeDelay: 100, // Delay in ms before writing to disk
-    expiredCheckDelay: 24 * 3600 * 1000, // Interval to check for expired entries
-  }),
+	store: new KeyvFile({
+		filename: path.join(os.homedir(), ".astra", "cache.json"),
+		writeDelay: 100, // Delay to write to file (in ms)
+		expiredCheckDelay: 1000 * 60 * 60, // Check for expired keys every hour
+		serialize: JSON.stringify,
+		deserialize: JSON.parse,
+	})
 });
+cache.set("version", VERSION); // Store the current version in cache
 
 // motivational quotes
 const quotes = [
@@ -159,12 +168,13 @@ cli.command(
 	},
 );
 
-const argv = await cli.parse();
-if (!argv._.length) {
-	cli.showHelp();
-	process.exit(0);
-}
-
+(async () => {
+  const argv = await cli.parse();
+  if (!argv._.length) {
+    cli.showHelp();
+    process.exit(0);
+  }
+})();
 // process.on('exit', () => {
 //     new signale.Signale({ types: { done: {badge: "⌚", label: "done", color: "blueBright" } } }).done(`Done in ${((Date.now() - startTime) / 1000).toFixed(2)}s`)
 // })

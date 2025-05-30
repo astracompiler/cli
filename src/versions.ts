@@ -13,7 +13,12 @@ export default async function versions() {
 				headers: {
 					"User-Agent": "AstraCLI",
 				},
-				cache
+				cache: {
+					get: (key: string) => cache.get(key),
+					set: (key: string, value: unknown) => cache.set(key, value),
+					delete: (key: string) => cache.delete(key),
+					clear: () => cache.clear(),
+				},
 			},
 		).json()) as Record<string, unknown>;
 	} catch (err) {
