@@ -10,8 +10,6 @@ import temp from "temp";
 import fs from "node:fs";
 import os from "node:os";
 import semver from "semver";
-import Keyv from 'keyv';
-import { KeyvFile } from 'keyv-file';
 
 temp.track();
 const __dirname = dirname(import.meta);
@@ -41,21 +39,8 @@ process.on("uncaughtException", (error) => {
 
 // Setup cache
 if (!fs.existsSync(path.join(os.homedir(), ".astra", "cache.json"))) {
-	fs.writeFileSync(
-		path.join(os.homedir(), ".astra", "cache.json"),
-		"{}",
-	)
+	fs.writeFileSync(path.join(os.homedir(), ".astra", "cache.json"), "{}");
 }
-export const cache = new Keyv({
-	store: new KeyvFile({
-		filename: path.join(os.homedir(), ".astra", "cache.json"),
-		writeDelay: 100, // Delay to write to file (in ms)
-		expiredCheckDelay: 1000 * 60 * 60, // Check for expired keys every hour
-		serialize: JSON.stringify,
-		deserialize: JSON.parse,
-	})
-});
-cache.set("version", VERSION); // Store the current version in cache
 
 // motivational quotes
 const quotes = [
@@ -169,11 +154,7 @@ cli.command(
 );
 
 (async () => {
-  const argv = await cli.parse();
-  if (!argv._.length) {
-    cli.showHelp();
-    process.exit(0);
-  }
+	await cli.parse();
 })();
 // process.on('exit', () => {
 //     new signale.Signale({ types: { done: {badge: "⌚", label: "done", color: "blueBright" } } }).done(`Done in ${((Date.now() - startTime) / 1000).toFixed(2)}s`)
