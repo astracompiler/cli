@@ -19,8 +19,8 @@
 		"astra": "node ./dist/astra.js",
 		"lint": "biome lint",
 		"fmt": "biome format --write",
-		"ts": "rimraf dist && tsc && yarn minify",
-		"pb": "yarn lint && yarn fmt && yarn ts && yarn npm publish",
+		"build": "rimraf dist && tsc && yarn minify",
+		"pb": "yarn lint && yarn fmt && yarn build && yarn npm publish",
 		"test": "vitest run --coverage"
 	},
 	"keywords": [
