@@ -80,7 +80,7 @@ const cli = yargs(hideBin(process.argv)) //hideBin(process.argv)
 cli.command(
 	"versions",
 	"Show available versions of Node.js",
-	() => {},
+	undefined,
 	async () => {
 		(await import("./versions.js")).default();
 	},
@@ -145,7 +145,7 @@ cli.command(
 cli.command(
 	"init",
 	"Initialize your project",
-	() => {},
+	undefined,
 	async () => {
 		(await import("./init.js")).default();
 	},
