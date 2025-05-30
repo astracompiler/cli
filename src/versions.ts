@@ -3,7 +3,7 @@ import nameparse from "./helpers/nameparse.js";
 import semver from "semver";
 import log from "signale";
 import got, { RequestError } from "got";
-import { cache } from "./astra.js";
+import { cache } from "./helpers/cache.js";
 export default async function versions() {
 	let res: Record<string, unknown> = {};
 	try {

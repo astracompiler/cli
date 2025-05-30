@@ -2,6 +2,7 @@ import { select } from "@inquirer/prompts";
 import got, { RequestError } from "got";
 import log from "signale";
 import {
+	cache,
 	getVersionPath,
 	isVersionInstalled,
 	listOfAvailableVersions,
@@ -21,7 +22,6 @@ import { spawnSync } from "node:child_process";
 import shasumMatch from "./helpers/shasum.js";
 import { readPackage } from "read-pkg";
 import rcedit from "rcedit";
-import { cache } from "./astra.js";
 // steps for building exe (4 steps: build, generate blob, inject blob, set metadata)
 const STEPS = 4;
 function step(curr: number) {
@@ -89,7 +89,7 @@ export default async function build({
 					set: (key: string, value: unknown) => cache.set(key, value),
 					delete: (key: string) => cache.delete(key),
 					clear: () => cache.clear(),
-				}
+				},
 			},
 		);
 	} catch (err) {

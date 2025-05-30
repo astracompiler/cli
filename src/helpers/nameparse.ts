@@ -1,6 +1,6 @@
 import got from "got";
 import path from "node:path";
-import { cache } from "../astra.js";
+import { cache } from "./cache.js";
 
 export default function nameparse(name: string): {
 	arch: "x86" | "x64" | "arm64";
