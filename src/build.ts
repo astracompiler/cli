@@ -74,7 +74,7 @@ export default async function build({
 	}
 
 	let offline = false;
-	let res: { assets: Array<{ name: string }> } = { assets: [] };
+	let res: { assets: { name: string }[] } = { assets: [] };
 
 	try {
 		await got(

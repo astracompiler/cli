@@ -169,7 +169,7 @@ describe(
 			).rejects.toThrow("exit 1");
 
 			spy.mockRestore();
-		})
+		});
 
 		// it("should throw error if config file already exists", async () => {
 		// 	const spy = vi.spyOn(process, "cwd").mockReturnValue("temp");

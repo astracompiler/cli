@@ -96,9 +96,7 @@ cli.command(
 		});
 	},
 	async (argv) => {
-		(await import("./install.js")).default(
-			argv as unknown as { ver: string },
-		);
+		(await import("./install.js")).default(argv as unknown as { ver: string });
 	},
 );
 
@@ -155,7 +153,7 @@ cli.command(
 
 (async () => {
 	await cli.parse();
-})().catch((error) => {
+})().catch((error: unknown) => {
 	log.fatal(error);
 	process.exit(1);
 });
