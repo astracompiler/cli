@@ -7,7 +7,6 @@
     <a href="https://npmjs.com/package/astra-cli"><img alt="NPM Version" src="https://img.shields.io/npm/v/astra-cli?label="></a>
     <a href="https://github.com/astracompiler/cli/actions"><img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/astracompiler/cli/main.yml?label="></a>
     <br/>
-    <a href="https://github.com/astracompiler/cli/blob/main/LICENSE"><img alt="NPM License" src="https://img.shields.io/npm/l/astra-cli"></a>
     <a href="https://app.netlify.com/projects/astra-js/deploys"><img alt="Netlify status" src="https://api.netlify.com/api/v1/badges/1737b126-dce7-4d82-9b76-8743c4ec3b67/deploy-status"/></a>
     <a href="https://codecov.io/gh/astracompiler/cli"><img src="https://codecov.io/gh/astracompiler/cli/graph/badge.svg?token=OJVP05V5YB"/></a>
     <a href="https://app.codacy.com/gh/astracompiler/cli/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade"><img src="https://app.codacy.com/project/badge/Grade/a6cdab2a4e974051890141c53ce8bb58"/></a>
