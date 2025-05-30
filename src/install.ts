@@ -8,6 +8,7 @@ import fs from "node:fs";
 import path from "node:path";
 import os from "node:os";
 import got, { RequestError } from "got";
+import { cache } from "./helpers/cache.js";
 export default async function install({ ver }: { ver: string }) {
 	let versionName: string;
 	try {
@@ -29,6 +30,12 @@ export default async function install({ ver }: { ver: string }) {
 		{
 			headers: {
 				"User-Agent": "AstraCLI",
+			},
+			cache: {
+				get: (key: string) => cache.get(key),
+				set: (key: string, value: unknown) => cache.set(key, value),
+				delete: (key: string) => cache.delete(key),
+				clear: () => cache.clear(),
 			},
 		},
 	).json()) as Record<string, unknown>;
@@ -79,16 +86,14 @@ export default async function install({ ver }: { ver: string }) {
 		path.join(os.homedir(), ".astra", "versions", versionFilename),
 	);
 	if (
-		!fs.existsSync(
-			path.join(os.homedir(), ".astra", "versions", versionName as string),
-		)
+		!fs.existsSync(path.join(os.homedir(), ".astra", "versions", versionName))
 	) {
 		const bar = new prgss.SingleBar({}, prgss.Presets.shades_classic);
 		bar.start(100, 0);
-		const assets = res.assets as Array<{
+		const assets = res.assets as {
 			name: string;
 			browser_download_url: string;
-		}>;
+		}[];
 		const asset = assets.find((asset) => asset.name === versionFilename);
 		if (!asset) {
 			log.error(`Asset ${versionFilename} not found in release assets.`);

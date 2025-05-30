@@ -2,6 +2,7 @@ import { select } from "@inquirer/prompts";
 import got, { RequestError } from "got";
 import log from "signale";
 import {
+	cache,
 	getVersionPath,
 	isVersionInstalled,
 	listOfAvailableVersions,
@@ -73,8 +74,7 @@ export default async function build({
 	}
 
 	let offline = false;
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	let res: any;
+	let res: { assets: { name: string }[] } = { assets: [] };
 
 	try {
 		await got(
@@ -82,6 +82,12 @@ export default async function build({
 			{
 				headers: {
 					"User-Agent": "AstraCLI",
+				},
+				cache: {
+					get: (key: string) => cache.get(key),
+					set: (key: string, value: unknown) => cache.set(key, value),
+					delete: (key: string) => cache.delete(key),
+					clear: () => cache.clear(),
 				},
 			},
 		);
@@ -97,6 +103,12 @@ export default async function build({
 			{
 				headers: {
 					"User-Agent": "AstraCLI",
+				},
+				cache: {
+					get: (key: string) => cache.get(key),
+					set: (key: string, value: unknown) => cache.set(key, value),
+					delete: (key: string) => cache.delete(key),
+					clear: () => cache.clear(),
 				},
 			},
 		).json();
@@ -144,13 +156,13 @@ export default async function build({
 
 	if (!argsProvided) {
 		let versions = res.assets;
-		type VersionAsset = {
+		interface VersionAsset {
 			name: string;
 			os: string;
 			arch: string;
 			version: string;
 			isLTS: boolean;
-		};
+		}
 
 		versions = res.assets
 			.map((asset: { name: string }) => asset.name)
@@ -158,7 +170,8 @@ export default async function build({
 			.sort((a: VersionAsset, b: VersionAsset) =>
 				semver.compare(b.version, a.version),
 			);
-		versions = versions.map((version: VersionAsset) => ({
+		const versionAssets: VersionAsset[] = versions as VersionAsset[];
+		const displayedVersions = versionAssets.map((version) => ({
 			name: `${chalk.green(version.version)} ${chalk.yellow(version.os)} ${chalk.gray(version.arch)} ${version.isLTS ? chalk.green("LTS") : ""}`,
 			value: generate({
 				arch: version.arch as "x64" | "x86" | "arm64",
@@ -186,7 +199,7 @@ export default async function build({
 		console.log();
 		versionName = await select({
 			message: "Select a version of your project",
-			choices: versions,
+			choices: displayedVersions,
 		});
 	} else {
 		const lts = await isLTS(node);

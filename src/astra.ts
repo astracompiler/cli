@@ -37,6 +37,11 @@ process.on("uncaughtException", (error) => {
 	}
 });
 
+// Setup cache
+if (!fs.existsSync(path.join(os.homedir(), ".astra", "cache.json"))) {
+	fs.writeFileSync(path.join(os.homedir(), ".astra", "cache.json"), "{}");
+}
+
 // motivational quotes
 const quotes = [
 	"Hi :)",
@@ -75,9 +80,9 @@ const cli = yargs(hideBin(process.argv)) //hideBin(process.argv)
 cli.command(
 	"versions",
 	"Show available versions of Node.js",
-	() => {},
+	undefined,
 	async () => {
-		void (await import("./versions.js")).default();
+		(await import("./versions.js")).default();
 	},
 );
 
@@ -91,9 +96,7 @@ cli.command(
 		});
 	},
 	async (argv) => {
-		void (await import("./install.js")).default(
-			argv as unknown as { ver: string },
-		);
+		(await import("./install.js")).default(argv as unknown as { ver: string });
 	},
 );
 
@@ -136,24 +139,24 @@ cli.command(
 			[key: string]: unknown;
 			noMetadata: boolean;
 		}
-		void (await import("./build.js")).default(argv as unknown as BuildArgs);
+		(await import("./build.js")).default(argv as unknown as BuildArgs);
 	},
 );
 cli.command(
 	"init",
 	"Initialize your project",
-	() => {},
+	undefined,
 	async () => {
-		void (await import("./init.js")).default();
+		(await import("./init.js")).default();
 	},
 );
 
-const argv = await cli.parse();
-if (!argv._.length) {
-	cli.showHelp();
-	process.exit(0);
-}
-
+(async () => {
+	await cli.parse();
+})().catch((error: unknown) => {
+	log.fatal(error);
+	process.exit(1);
+});
 // process.on('exit', () => {
 //     new signale.Signale({ types: { done: {badge: "⌚", label: "done", color: "blueBright" } } }).done(`Done in ${((Date.now() - startTime) / 1000).toFixed(2)}s`)
 // })

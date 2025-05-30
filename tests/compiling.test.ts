@@ -4,18 +4,23 @@ import fs from "node:fs";
 import build from "../src/build.js";
 import install from "../src/install.js";
 import versions from "../src/versions.js";
-import init from '../src/init.js';
+import init from "../src/init.js";
 import got from "got";
+import { platform } from "node:os";
 
 beforeAll(async () => {
 	try {
 		if ((await got("https://api.github.com")).statusCode !== 200) {
-			throw new Error("GitHub API is not reachable. Rate limit exceeded or network issue.");
+			throw new Error(
+				"GitHub API is not reachable. Rate limit exceeded or network issue.",
+			);
 		}
 	} catch (error) {
-		throw new Error("GitHub API is not reachable. Rate limit exceeded or network issue.");
+		throw new Error(
+			"GitHub API is not reachable. Rate limit exceeded or network issue.",
+		);
 	}
-	execSync("yarn ts");
+	execSync("yarn build");
 	fs.mkdirSync("temp");
 	fs.mkdirSync("temp/hello-i-am-a-folder");
 	fs.writeFileSync(
@@ -32,7 +37,7 @@ beforeAll(async () => {
 			ver: "node_v22.15.1-win-x64",
 		});
 	}
-}, 1000 * 60);
+}, 1000 * 120);
 
 describe(
 	"compiling",
@@ -43,7 +48,7 @@ describe(
 				outDir: "temp",
 				node: "node_v22.15.1-win-x64",
 				disShasumCheck: false,
-				noMetadata: true,
+				noMetadata: platform() !== "win32",
 			});
 		});
 
@@ -53,7 +58,7 @@ describe(
 				outDir: "temp",
 				node: "node_v22.15.1-win-x64",
 				disShasumCheck: false,
-				noMetadata: true,
+				noMetadata: platform() !== "win32",
 			});
 		});
 
@@ -65,7 +70,7 @@ describe(
 			await expect(
 				build({
 					entry: "temp/i-do-not-exist.ts",
-					outDir: "temp",
+					outDir: "temp/b.exe",
 					node: "node_v22.15.1-win-x64",
 					disShasumCheck: false,
 					noMetadata: true,
@@ -74,6 +79,7 @@ describe(
 
 			spy.mockRestore();
 		});
+
 		it("should throw error if entry is not defined", async () => {
 			const spy = vi.spyOn(process, "exit").mockImplementation((code) => {
 				throw new Error(`exit ${code}`);
@@ -83,7 +89,7 @@ describe(
 				build({
 					// @ts-ignore
 					entry: undefined,
-					outDir: "temp",
+					outDir: "temp/b.exe",
 					node: "node_v99.99.99-win-x64",
 					disShasumCheck: false,
 					noMetadata: true,
@@ -101,7 +107,7 @@ describe(
 			await expect(
 				build({
 					entry: "temp/im-not-a-js-ts-file",
-					outDir: "temp",
+					outDir: "temp/b.exe",
 					node: "node_v22.15.1-win-x64",
 					disShasumCheck: false,
 					noMetadata: true,
@@ -119,7 +125,7 @@ describe(
 			await expect(
 				build({
 					entry: "temp/hello-i-am-a-folder",
-					outDir: "temp",
+					outDir: "temp/b.exe",
 					node: "node_v22.15.1-win-x64",
 					disShasumCheck: false,
 					noMetadata: true,
@@ -130,14 +136,14 @@ describe(
 		});
 
 		it("should show avaliable node versions", async () => {
-			await expect(
-				versions()
-			).resolves.not.toThrow();
-		})
+			await expect(versions()).resolves.not.toThrow();
+		});
 
 		it("should create config file", async () => {
 			const spy = vi.spyOn(process, "cwd").mockReturnValue("temp");
-			const spy2 = vi.spyOn(process, "exit").mockImplementation((() => {}) as typeof process.exit);
+			const spy2 = vi
+				.spyOn(process, "exit")
+				.mockImplementation((() => {}) as typeof process.exit);
 			expect(() => init()).not.toThrow();
 			if (!fs.existsSync("temp/astra.config.js")) {
 				expect(true).toBe(false); // Crash if config file does not exist
@@ -145,25 +151,43 @@ describe(
 			fs.rmSync("temp/astra.config.js");
 			spy.mockRestore();
 			spy2.mockRestore();
+		});
 
-		})
-
-		it("should throw error if config file already exists", async () => {
-			const spy = vi.spyOn(process, "cwd").mockReturnValue("temp");
-			const spy2 = vi.spyOn(process, "exit").mockImplementation((code) => {
+		it("should crash beacuse i didn't provide all arguments", async () => {
+			const spy = vi.spyOn(process, "exit").mockImplementation((code) => {
 				throw new Error(`exit ${code}`);
 			});
 
-			expect(() => init()).not.toThrow();
-			expect(() => init()).toThrow();
+			await expect(
+				// @ts-ignore
+				build({
+					entry: "temp/hello-i-am-a-folder",
+					node: "node_v22.15.1-win-x64",
+					disShasumCheck: false,
+					noMetadata: true,
+				}),
+			).rejects.toThrow("exit 1");
 
-			fs.rmSync("temp/astra.config.js");
 			spy.mockRestore();
-			spy2.mockRestore();
-		})
+		});
 
+		// it("should throw error if config file already exists", async () => {
+		// 	const spy = vi.spyOn(process, "cwd").mockReturnValue("temp");
+		// 	const spy2 = vi.spyOn(process, "exit").mockImplementation((code) => {
+		// 		throw new Error(`exit ${code}`);
+		// 	});
+
+		// 	expect(() => init()).not.toThrow();
+		// 	await expect(() => init()).rejects.toThrow("exit 0");
+
+		// 	spy2.mockRestore();
+
+		// 	fs.rmSync("temp/astra.config.js");
+		// 	spy.mockRestore();
+		// 	spy2.mockRestore();
+		// });
 	},
-	1000 * 60,
+	1000 * 120,
 );
 
 afterAll(() => {

@@ -6,17 +6,21 @@ import { got } from "got";
 beforeAll(async () => {
 	try {
 		if ((await got("https://api.github.com")).statusCode !== 200) {
-			throw new Error("GitHub API is not reachable. Rate limit exceeded or network issue.");
+			throw new Error(
+				"GitHub API is not reachable. Rate limit exceeded or network issue.",
+			);
 		}
 	} catch (error) {
-		throw new Error("GitHub API is not reachable. Rate limit exceeded or network issue.");
+		throw new Error(
+			"GitHub API is not reachable. Rate limit exceeded or network issue.",
+		);
 	}
-})
+});
 
 describe("helpers", () => {
 	it("should return it's LTS version", async () => {
 		await expect(isLTS("node_v22.15.1-win-x64")).resolves.toBe(true);
-	});
+	}, 15000);
 
 	it("should return it's not LTS version", async () => {
 		await expect(isLTS("node_v23.11.1-win-x64")).resolves.toBe(false);
