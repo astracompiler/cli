@@ -119,5 +119,5 @@ jobs:
       - name: Lint code
         run: yarn lint
       
-      - name: Run ts script
-        run: yarn ts
+      - name: Run build script
+        run: yarn build
