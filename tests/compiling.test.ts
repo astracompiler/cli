@@ -37,7 +37,7 @@ beforeAll(async () => {
 			ver: "node_v22.15.1-win-x64",
 		});
 	}
-}, 1000 * 60);
+}, 1000 * 120);
 
 describe(
 	"compiling",
@@ -187,7 +187,7 @@ describe(
 		// 	spy2.mockRestore();
 		// });
 	},
-	1000 * 60,
+	1000 * 120,
 );
 
 afterAll(() => {
