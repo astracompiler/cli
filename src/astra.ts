@@ -10,6 +10,8 @@ import temp from "temp";
 import fs from "node:fs";
 import os from "node:os";
 import semver from "semver";
+import Keyv from 'keyv';
+import { KeyvFile } from 'keyv-file';
 
 temp.track();
 const __dirname = dirname(import.meta);
@@ -35,6 +37,15 @@ process.on("uncaughtException", (error) => {
 		log.fatal(error);
 		process.exit(1);
 	}
+});
+
+// Setup cache
+export const cache = new Keyv({
+  store: new KeyvFile({
+    filename: path.join(os.homedir(), ".astra", "cache.json"), // Path to the cache file
+    writeDelay: 100, // Delay in ms before writing to disk
+    expiredCheckDelay: 24 * 3600 * 1000, // Interval to check for expired entries
+  }),
 });
 
 // motivational quotes

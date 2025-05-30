@@ -21,6 +21,7 @@ import { spawnSync } from "node:child_process";
 import shasumMatch from "./helpers/shasum.js";
 import { readPackage } from "read-pkg";
 import rcedit from "rcedit";
+import { cache } from "./astra.js";
 // steps for building exe (4 steps: build, generate blob, inject blob, set metadata)
 const STEPS = 4;
 function step(curr: number) {
@@ -98,6 +99,7 @@ export default async function build({
 				headers: {
 					"User-Agent": "AstraCLI",
 				},
+				cache
 			},
 		).json();
 	} else {
