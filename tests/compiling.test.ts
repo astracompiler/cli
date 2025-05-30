@@ -58,7 +58,7 @@ describe(
 				outDir: "temp",
 				node: "node_v22.15.1-win-x64",
 				disShasumCheck: false,
-				noMetadata: platform() === "win32",
+				noMetadata: platform() !== "win32",
 			});
 		});
 
