@@ -82,7 +82,7 @@ cli.command(
 	"Show available versions of Node.js",
 	() => {},
 	async () => {
-		void (await import("./versions.js")).default();
+		(await import("./versions.js")).default();
 	},
 );
 
@@ -96,7 +96,7 @@ cli.command(
 		});
 	},
 	async (argv) => {
-		void (await import("./install.js")).default(
+		(await import("./install.js")).default(
 			argv as unknown as { ver: string },
 		);
 	},
@@ -141,7 +141,7 @@ cli.command(
 			[key: string]: unknown;
 			noMetadata: boolean;
 		}
-		void (await import("./build.js")).default(argv as unknown as BuildArgs);
+		(await import("./build.js")).default(argv as unknown as BuildArgs);
 	},
 );
 cli.command(
@@ -149,7 +149,7 @@ cli.command(
 	"Initialize your project",
 	() => {},
 	async () => {
-		void (await import("./init.js")).default();
+		(await import("./init.js")).default();
 	},
 );
 

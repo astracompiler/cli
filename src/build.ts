@@ -74,8 +74,7 @@ export default async function build({
 	}
 
 	let offline = false;
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	let res: any;
+	let res: { assets: Array<{ name: string }> } = { assets: [] };
 
 	try {
 		await got(
@@ -157,13 +156,13 @@ export default async function build({
 
 	if (!argsProvided) {
 		let versions = res.assets;
-		type VersionAsset = {
+		interface VersionAsset {
 			name: string;
 			os: string;
 			arch: string;
 			version: string;
 			isLTS: boolean;
-		};
+		}
 
 		versions = res.assets
 			.map((asset: { name: string }) => asset.name)
@@ -171,7 +170,8 @@ export default async function build({
 			.sort((a: VersionAsset, b: VersionAsset) =>
 				semver.compare(b.version, a.version),
 			);
-		versions = versions.map((version: VersionAsset) => ({
+		const versionAssets: VersionAsset[] = versions as VersionAsset[];
+		let displayedVersions = versionAssets.map((version) => ({
 			name: `${chalk.green(version.version)} ${chalk.yellow(version.os)} ${chalk.gray(version.arch)} ${version.isLTS ? chalk.green("LTS") : ""}`,
 			value: generate({
 				arch: version.arch as "x64" | "x86" | "arm64",
@@ -199,7 +199,7 @@ export default async function build({
 		console.log();
 		versionName = await select({
 			message: "Select a version of your project",
-			choices: versions,
+			choices: displayedVersions,
 		});
 	} else {
 		const lts = await isLTS(node);
