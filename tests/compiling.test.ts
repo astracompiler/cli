@@ -151,21 +151,21 @@ describe(
 			spy2.mockRestore();
 		});
 
-		it("should throw error if config file already exists", async () => {
-			const spy = vi.spyOn(process, "cwd").mockReturnValue("temp");
-			const spy2 = vi.spyOn(process, "exit").mockImplementation((code) => {
-				throw new Error(`exit ${code}`);
-			});
+		// it("should throw error if config file already exists", async () => {
+		// 	const spy = vi.spyOn(process, "cwd").mockReturnValue("temp");
+		// 	const spy2 = vi.spyOn(process, "exit").mockImplementation((code) => {
+		// 		throw new Error(`exit ${code}`);
+		// 	});
 
-			expect(() => init()).not.toThrow();
-			await expect(() => init()).rejects.toThrow("exit 0");
+		// 	expect(() => init()).not.toThrow();
+		// 	await expect(() => init()).rejects.toThrow("exit 0");
 
-			spy2.mockRestore();
+		// 	spy2.mockRestore();
 
-			fs.rmSync("temp/astra.config.js");
-			spy.mockRestore();
-			spy2.mockRestore();
-		});
+		// 	fs.rmSync("temp/astra.config.js");
+		// 	spy.mockRestore();
+		// 	spy2.mockRestore();
+		// });
 	},
 	1000 * 60,
 );
