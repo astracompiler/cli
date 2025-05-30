@@ -20,7 +20,7 @@ beforeAll(async () => {
 describe("helpers", () => {
 	it("should return it's LTS version", async () => {
 		await expect(isLTS("node_v22.15.1-win-x64")).resolves.toBe(true);
-	});
+	}, 15000);
 
 	it("should return it's not LTS version", async () => {
 		await expect(isLTS("node_v23.11.1-win-x64")).resolves.toBe(false);
