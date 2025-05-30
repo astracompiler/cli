@@ -78,6 +78,7 @@ describe(
 
 			spy.mockRestore();
 		});
+		
 		it("should throw error if entry is not defined", async () => {
 			const spy = vi.spyOn(process, "exit").mockImplementation((code) => {
 				throw new Error(`exit ${code}`);
@@ -150,6 +151,24 @@ describe(
 			spy.mockRestore();
 			spy2.mockRestore();
 		});
+
+		it("should crash beacuse i didn't provide all arguments", async () => {
+			const spy = vi.spyOn(process, "exit").mockImplementation((code) => {
+				throw new Error(`exit ${code}`);
+			});
+
+			await expect(
+				// @ts-ignore
+				build({
+					entry: "temp/hello-i-am-a-folder",
+					node: "node_v22.15.1-win-x64",
+					disShasumCheck: false,
+					noMetadata: true,
+				}),
+			).rejects.toThrow("exit 1");
+
+			spy.mockRestore();
+		})
 
 		// it("should throw error if config file already exists", async () => {
 		// 	const spy = vi.spyOn(process, "cwd").mockReturnValue("temp");
