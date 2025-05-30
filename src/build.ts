@@ -171,7 +171,7 @@ export default async function build({
 				semver.compare(b.version, a.version),
 			);
 		const versionAssets: VersionAsset[] = versions as VersionAsset[];
-		let displayedVersions = versionAssets.map((version) => ({
+		const displayedVersions = versionAssets.map((version) => ({
 			name: `${chalk.green(version.version)} ${chalk.yellow(version.os)} ${chalk.gray(version.arch)} ${version.isLTS ? chalk.green("LTS") : ""}`,
 			value: generate({
 				arch: version.arch as "x64" | "x86" | "arm64",
