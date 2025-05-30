@@ -6,6 +6,7 @@ import install from "../src/install.js";
 import versions from "../src/versions.js";
 import init from "../src/init.js";
 import got from "got";
+import { platform } from "node:os";
 
 beforeAll(async () => {
 	try {
@@ -47,7 +48,7 @@ describe(
 				outDir: "temp",
 				node: "node_v22.15.1-win-x64",
 				disShasumCheck: false,
-				noMetadata: true,
+				noMetadata: platform() === "win32",
 			});
 		});
 
@@ -57,7 +58,7 @@ describe(
 				outDir: "temp",
 				node: "node_v22.15.1-win-x64",
 				disShasumCheck: false,
-				noMetadata: true,
+				noMetadata: platform() === "win32",
 			});
 		});
 
@@ -78,6 +79,7 @@ describe(
 
 			spy.mockRestore();
 		});
+
 		it("should throw error if entry is not defined", async () => {
 			const spy = vi.spyOn(process, "exit").mockImplementation((code) => {
 				throw new Error(`exit ${code}`);
