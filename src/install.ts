@@ -8,6 +8,7 @@ import fs from "node:fs";
 import path from "node:path";
 import os from "node:os";
 import got, { RequestError } from "got";
+import { cache } from "./astra.js";
 export default async function install({ ver }: { ver: string }) {
 	let versionName: string;
 	try {
@@ -30,6 +31,7 @@ export default async function install({ ver }: { ver: string }) {
 			headers: {
 				"User-Agent": "AstraCLI",
 			},
+			cache
 		},
 	).json()) as Record<string, unknown>;
 	if (ver) {
