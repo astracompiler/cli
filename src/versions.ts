@@ -3,6 +3,7 @@ import nameparse from "./helpers/nameparse.js";
 import semver from "semver";
 import log from "signale";
 import got, { RequestError } from "got";
+import { cache } from "./helpers/cache.js";
 export default async function versions() {
 	let res: Record<string, unknown> = {};
 	try {
@@ -11,6 +12,12 @@ export default async function versions() {
 			{
 				headers: {
 					"User-Agent": "AstraCLI",
+				},
+				cache: {
+					get: (key: string) => cache.get(key),
+					set: (key: string, value: unknown) => cache.set(key, value),
+					delete: (key: string) => cache.delete(key),
+					clear: () => cache.clear(),
 				},
 			},
 		).json()) as Record<string, unknown>;

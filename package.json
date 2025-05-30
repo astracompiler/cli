@@ -19,8 +19,8 @@
 		"astra": "node ./dist/astra.js",
 		"lint": "biome lint",
 		"fmt": "biome format --write",
-		"ts": "rimraf dist && tsc && yarn minify",
-		"pb": "yarn lint && yarn fmt && yarn ts && yarn npm publish",
+		"build": "rimraf dist && tsc && yarn minify",
+		"pb": "yarn lint && yarn fmt && yarn build && yarn npm publish",
 		"test": "vitest run --coverage"
 	},
 	"keywords": [
@@ -48,7 +48,9 @@
 		"cosmiconfig": "^9.0.0",
 		"dirname-filename-esm": "^1.1.2",
 		"esbuild": "^0.25.0",
-		"got": "^14.4.6",
+		"got": "^14.4.7",
+		"keyv": "^5.3.3",
+		"keyv-file": "^5.1.2",
 		"postject": "^1.0.0-alpha.5",
 		"rcedit": "^4.0.1",
 		"read-pkg": "^9.0.1",
@@ -72,6 +74,8 @@
 		"typescript": "^5.8.2",
 		"vitest": "^3.1.4"
 	},
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"packageManager": "yarn@4.9.1+sha512.f95ce356460e05be48d66401c1ae64ef84d163dd689964962c6888a9810865e39097a5e9de748876c2e0bf89b232d583c33982773e9903ae7a76257270986538"
 }

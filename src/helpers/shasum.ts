@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import path from "node:path";
 import fs from "node:fs/promises"; // ⬅️ Używamy wersji async `fs`
 import got from "got";
+import { cache } from "./cache.js";
 
 function hash(b: Buffer): string {
 	return createHash("sha256").update(b).digest("hex");
@@ -17,6 +18,12 @@ export default async function shasumMatch(
 			{
 				headers: {
 					"User-Agent": "AstraCLI",
+				},
+				cache: {
+					get: (key: string) => cache.get(key),
+					set: (key: string, value: unknown) => cache.set(key, value),
+					delete: (key: string) => cache.delete(key),
+					clear: () => cache.clear(),
 				},
 			},
 		).json();

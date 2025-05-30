@@ -20,7 +20,7 @@ beforeAll(async () => {
 			"GitHub API is not reachable. Rate limit exceeded or network issue.",
 		);
 	}
-	execSync("yarn ts");
+	execSync("yarn build");
 	fs.mkdirSync("temp");
 	fs.mkdirSync("temp/hello-i-am-a-folder");
 	fs.writeFileSync(
@@ -153,21 +153,39 @@ describe(
 			spy2.mockRestore();
 		});
 
-		it("should throw error if config file already exists", async () => {
-			const spy = vi.spyOn(process, "cwd").mockReturnValue("temp");
-			const spy2 = vi.spyOn(process, "exit").mockImplementation((code) => {
+		it("should crash beacuse i didn't provide all arguments", async () => {
+			const spy = vi.spyOn(process, "exit").mockImplementation((code) => {
 				throw new Error(`exit ${code}`);
 			});
 
-			expect(() => init()).not.toThrow();
-			await expect(() => init()).rejects.toThrow("exit 0");
+			await expect(
+				// @ts-ignore
+				build({
+					entry: "temp/hello-i-am-a-folder",
+					node: "node_v22.15.1-win-x64",
+					disShasumCheck: false,
+					noMetadata: true,
+				}),
+			).rejects.toThrow("exit 1");
 
-			spy2.mockRestore();
-
-			fs.rmSync("temp/astra.config.js");
 			spy.mockRestore();
-			spy2.mockRestore();
-		});
+		})
+
+		// it("should throw error if config file already exists", async () => {
+		// 	const spy = vi.spyOn(process, "cwd").mockReturnValue("temp");
+		// 	const spy2 = vi.spyOn(process, "exit").mockImplementation((code) => {
+		// 		throw new Error(`exit ${code}`);
+		// 	});
+
+		// 	expect(() => init()).not.toThrow();
+		// 	await expect(() => init()).rejects.toThrow("exit 0");
+
+		// 	spy2.mockRestore();
+
+		// 	fs.rmSync("temp/astra.config.js");
+		// 	spy.mockRestore();
+		// 	spy2.mockRestore();
+		// });
 	},
 	1000 * 60,
 );

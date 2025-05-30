@@ -2,6 +2,7 @@ import { select } from "@inquirer/prompts";
 import got, { RequestError } from "got";
 import log from "signale";
 import {
+	cache,
 	getVersionPath,
 	isVersionInstalled,
 	listOfAvailableVersions,
@@ -83,6 +84,12 @@ export default async function build({
 				headers: {
 					"User-Agent": "AstraCLI",
 				},
+				cache: {
+					get: (key: string) => cache.get(key),
+					set: (key: string, value: unknown) => cache.set(key, value),
+					delete: (key: string) => cache.delete(key),
+					clear: () => cache.clear(),
+				},
 			},
 		);
 	} catch (err) {
@@ -97,6 +104,12 @@ export default async function build({
 			{
 				headers: {
 					"User-Agent": "AstraCLI",
+				},
+				cache: {
+					get: (key: string) => cache.get(key),
+					set: (key: string, value: unknown) => cache.set(key, value),
+					delete: (key: string) => cache.delete(key),
+					clear: () => cache.clear(),
 				},
 			},
 		).json();

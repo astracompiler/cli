@@ -37,6 +37,11 @@ process.on("uncaughtException", (error) => {
 	}
 });
 
+// Setup cache
+if (!fs.existsSync(path.join(os.homedir(), ".astra", "cache.json"))) {
+	fs.writeFileSync(path.join(os.homedir(), ".astra", "cache.json"), "{}");
+}
+
 // motivational quotes
 const quotes = [
 	"Hi :)",
@@ -148,12 +153,9 @@ cli.command(
 	},
 );
 
-const argv = await cli.parse();
-if (!argv._.length) {
-	cli.showHelp();
-	process.exit(0);
-}
-
+(async () => {
+	await cli.parse();
+})();
 // process.on('exit', () => {
 //     new signale.Signale({ types: { done: {badge: "⌚", label: "done", color: "blueBright" } } }).done(`Done in ${((Date.now() - startTime) / 1000).toFixed(2)}s`)
 // })
