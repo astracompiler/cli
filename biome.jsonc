@@ -10,7 +10,7 @@
 		"ignore": []
 	},
 	"formatter": {
-		"ignore": ["dist", "temp", "package.json"],
+		"ignore": ["dist", "temp", "package.json", "coverage"],
 		"enabled": true,
 		"indentStyle": "tab"
 	},
@@ -18,7 +18,7 @@
 		"enabled": true
 	},
 	"linter": {
-		"ignore": ["dist", "*.test.(js|ts)", "temp"],
+		"ignore": ["dist", "*.test.(js|ts)", "temp", "coverage"],
 		"enabled": true,
 		"rules": {
 			"recommended": true
