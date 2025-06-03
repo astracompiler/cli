@@ -10,7 +10,7 @@
 		"ignore": []
 	},
 	"formatter": {
-		"ignore": ["dist", "temp"],
+		"ignore": ["dist", "temp", "package.json"],
 		"enabled": true,
 		"indentStyle": "tab"
 	},

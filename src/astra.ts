@@ -142,14 +142,9 @@ cli.command(
 		(await import("./build.js")).default(argv as unknown as BuildArgs);
 	},
 );
-cli.command(
-	"init",
-	"Initialize your project",
-	undefined,
-	async () => {
-		(await import("./init.js")).default();
-	},
-);
+cli.command("init", "Initialize your project", undefined, async () => {
+	(await import("./init.js")).default();
+});
 
 (async () => {
 	await cli.parse();
