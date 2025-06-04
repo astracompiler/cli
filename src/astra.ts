@@ -80,7 +80,7 @@ const cli = yargs(hideBin(process.argv)) //hideBin(process.argv)
 cli.command(
 	"versions",
 	"Show available versions of Node.js",
-	undefined,
+	() => {},
 	async () => {
 		(await import("./versions.js")).default();
 	},
@@ -142,12 +142,16 @@ cli.command(
 		(await import("./build.js")).default(argv as unknown as BuildArgs);
 	},
 );
-cli.command("init", "Initialize your project", undefined, async () => {
+cli.command("init", "Initialize your project", () => {}, async () => {
 	(await import("./init.js")).default();
 });
 
 (async () => {
 	await cli.parse();
+	if ((await cli.argv)._.length === 0) {
+		// If no command is provided, show help
+		cli.showHelp();
+	}
 })().catch((error: unknown) => {
 	log.fatal(error);
 	process.exit(1);
