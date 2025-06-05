@@ -1848,9 +1848,9 @@ __metadata:
   linkType: hard
 
 "form-data-encoder@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "form-data-encoder@npm:4.0.2"
-  checksum: 10c0/559d3130e265316452434eaf68d68560fb36392ff4d04614683419de4fb43c3dbe152dc303599fae382ce24d3451a6d3d289d3bcc182ae3d8ad32e7ce8e35e53
+  version: 4.1.0
+  resolution: "form-data-encoder@npm:4.1.0"
+  checksum: 10c0/cbd655aa8ffff6f7c2733b1d8e95fa9a2fe8a88a90bde29fb54b8e02c9406e51f32a014bfe8297d67fbac9f77614d14a8b4bbc4fd0352838e67e97a881d06332
   languageName: node
   linkType: hard
 
