@@ -20,6 +20,7 @@ beforeAll(async () => {
 			"GitHub API is not reachable. Rate limit exceeded or network issue.",
 		);
 	}
+	fs.rmSync("temp", { recursive: true, force: true });
 	execSync("yarn build");
 	fs.mkdirSync("temp");
 	fs.mkdirSync("temp/hello-i-am-a-folder");
