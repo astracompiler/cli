@@ -20,7 +20,7 @@ const singleSettings = [
 const noPrefixSettings = ["application-manifest"];
 const __dirname = dirname(import.meta);
 export default async function rcedit(exe: string, options: Rcedit.Options) {
-	const node_modules = path.resolve(`${__dirname}/`);
+	const node_modules = path.resolve(`${__dirname}/../`);
 	const pathToExe = await normalizePath(exe);
 	const usingWine = isWineInstalled() && !canRunWindowsExeNatively();
 	const rceditExe = isx64()
