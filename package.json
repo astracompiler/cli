@@ -46,6 +46,7 @@
 		"chalk": "^5.4.1",
 		"cli-progress": "^3.12.0",
 		"cosmiconfig": "^9.0.0",
+		"cross-spawn-windows-exe": "^1.2.0",
 		"dirname-filename-esm": "^1.1.2",
 		"esbuild": "^0.25.0",
 		"got": "^14.4.7",
