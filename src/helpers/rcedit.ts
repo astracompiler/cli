@@ -25,7 +25,7 @@ export default async function rcedit(exe: string, options: Rcedit.Options) {
 		: "node_modules/rcedit/bin/rcedit.exe";
 
 	const args = [];
-	
+
 	if (usingWine) args.push("wine");
 	args.push(rceditExe, pathToExe);
 
