@@ -22,6 +22,8 @@ import { spawnSync } from "node:child_process";
 import shasumMatch from "./helpers/shasum.js";
 import { readPackage } from "read-pkg";
 import rcedit from "./helpers/rcedit.js";
+import isWineInstalled from "./helpers/iswineinstalled.js";
+import { canRunWindowsExeNatively } from "cross-spawn-windows-exe";
 
 // steps for building exe (4 steps: build, generate blob, inject blob, set metadata)
 const STEPS = 4;
@@ -84,12 +86,6 @@ export default async function build({
 				headers: {
 					"User-Agent": "AstraCLI",
 				},
-				cache: {
-					get: (key: string) => cache.get(key),
-					set: (key: string, value: unknown) => cache.set(key, value),
-					delete: (key: string) => cache.delete(key),
-					clear: () => cache.clear(),
-				},
 			},
 		);
 	} catch (err) {
@@ -120,6 +116,7 @@ export default async function build({
 	let argsProvided = false;
 	let versionName: string;
 	const config = await getConfig();
+
 
 	// validate arguments
 	const argsValidate = [outDir, node].filter((arg) => arg !== undefined);
@@ -269,13 +266,24 @@ export default async function build({
 
 	// meta step 2
 	log.start(`${step(2)} Setting file metadata...`);
-	// TODO: fix when no config skips metadata
+	
+	function checkWine(meta: boolean) {
+		if (meta && !isWineInstalled() && !canRunWindowsExeNatively()) {
+			log.error(
+				"Wine is not installed or not configured properly. Please install Wine to set file metadata.",
+			);
+			log.error("Download here: https://l.qwerty.ovh/astra-wine-dl");
+			log.info("If you don't want to set file metadata, use --noMetadata flag or set it in the config.");
+			process.exit(1);
+		}
+	}
 
 	if (noMetadata === true) {
 		log.info("Setting file metadata skipped...");
 	} else if (config?.modifyMetadata === false) {
 		log.info("Setting file metadata skipped...");
 	} else {
+		checkWine(noMetadata);
 		let iconpath: string | undefined;
 		try {
 			iconpath = path.resolve(config?.exe.icon);

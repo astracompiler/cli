@@ -6,6 +6,7 @@ import {
 	normalizePath,
 	spawnExe,
 } from "cross-spawn-windows-exe";
+import isWineInstalled from "./iswineinstalled.js";
 
 const pairSettings = ["version-string", "resource-string"];
 const singleSettings = [
@@ -18,6 +19,7 @@ const noPrefixSettings = ["application-manifest"];
 
 export default async function rcedit(exe: string, options: Rcedit.Options) {
 	const pathToExe = await normalizePath(exe);
+    const usingWine = isWineInstalled() && !canRunWindowsExeNatively();
 	const rceditExe = isx64()
 		? "node_modules/rcedit/bin/rcedit-x64.exe"
 		: "node_modules/rcedit/bin/rcedit.exe";
