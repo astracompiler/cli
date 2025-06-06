@@ -19,7 +19,7 @@
 		"astra": "node ./dist/astra.js",
 		"lint": "biome lint",
 		"fmt": "biome format --write",
-		"build": "rimraf dist && tsc && yarn minify",
+		"build": "rimraf dist && node build.tool.js",
 		"pb": "yarn lint && yarn fmt && yarn build && yarn npm publish",
 		"test": "vitest run --coverage",
 		"test-ui": "vitest --ui"
@@ -72,8 +72,8 @@
 		"@types/yargs": "^17.0.33",
 		"@vitest/coverage-v8": "^3.1.4",
 		"@vitest/ui": "3.2.2",
+		"esbuild-node-externals": "^1.18.0",
 		"rimraf": "^6.0.1",
-		"terser": "^5.39.0",
 		"typescript": "^5.8.2",
 		"vitest": "^3.1.4"
 	},
