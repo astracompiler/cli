@@ -7,6 +7,8 @@ import {
 	spawnExe,
 } from "cross-spawn-windows-exe";
 import isWineInstalled from "./iswineinstalled.ts";
+import { dirname } from "dirname-filename-esm";
+import path from "node:path";
 
 const pairSettings = ["version-string", "resource-string"];
 const singleSettings = [
@@ -16,13 +18,14 @@ const singleSettings = [
 	"requested-execution-level",
 ];
 const noPrefixSettings = ["application-manifest"];
-
+const __dirname = dirname(import.meta);
 export default async function rcedit(exe: string, options: Rcedit.Options) {
+	const node_modules = path.resolve(`${__dirname}/../..`);
 	const pathToExe = await normalizePath(exe);
 	const usingWine = isWineInstalled() && !canRunWindowsExeNatively();
 	const rceditExe = isx64()
-		? "node_modules/rcedit/bin/rcedit-x64.exe"
-		: "node_modules/rcedit/bin/rcedit.exe";
+		? path.join(node_modules, "/rcedit/bin/rcedit-x64.exe")
+		: path.join(node_modules, "/rcedit/bin/rcedit.exe");
 
 	const args = [];
 
@@ -60,7 +63,11 @@ export default async function rcedit(exe: string, options: Rcedit.Options) {
 		spawnOptions.env.WINEDEBUG = "-all";
 	}
 
-	await spawnExe(rceditExe, args, spawnOptions);
+	try {
+		await spawnExe(rceditExe, args, spawnOptions);
+	} catch (error) {
+		console.error("Error occurred while editing resource:", error);
+	}
 }
 
 function isx64(): boolean {
