@@ -22,7 +22,8 @@
 		"build": "rimraf dist && node build.tool.js",
 		"pb": "yarn lint && yarn fmt && yarn build && yarn npm publish",
 		"test": "vitest run --coverage",
-		"test-ui": "vitest --ui"
+		"test-ui": "vitest --ui",
+		"c": "yarn fmt && yarn lint && yarn build"
 	},
 	"keywords": [
 		"astra",

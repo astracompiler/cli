@@ -57,7 +57,10 @@ describe("helpers", () => {
 	});
 
 	it("should return wine is not installed", () => {
-		if (process.env.CI && (process.platform === "darwin" || process.platform === "linux")) {
+		if (
+			process.env.CI &&
+			(process.platform === "darwin" || process.platform === "linux")
+		) {
 			expect(isWineInstalled()).toBe(false);
 		} else {
 			// skip test
