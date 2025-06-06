@@ -21,7 +21,7 @@ import { inject } from "postject";
 import { spawnSync } from "node:child_process";
 import shasumMatch from "./helpers/shasum.js";
 import { readPackage } from "read-pkg";
-import rcedit from "rcedit";
+import rcedit from "./helpers/rcedit.js";
 
 // steps for building exe (4 steps: build, generate blob, inject blob, set metadata)
 const STEPS = 4;

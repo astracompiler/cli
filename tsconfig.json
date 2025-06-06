@@ -118,5 +118,6 @@
 		"temp",
 		"vitest.config.ts",
 		"coverage"
-	]
+	],
+	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.js"]
 }
