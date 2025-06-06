@@ -27,7 +27,7 @@ export default async function rcedit(exe: string, options: Rcedit.Options) {
 		? path.join(node_modules, "/rcedit/bin/rcedit-x64.exe")
 		: path.join(node_modules, "/rcedit/bin/rcedit.exe");
 	let program = rceditExe;
-	
+
 	const args = [];
 
 	if (usingWine) {
