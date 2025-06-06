@@ -1,6 +1,6 @@
 import semver from "semver";
 import log from "signale";
-import nameparse, { generate, isLTS } from "./helpers/nameparse.js";
+import nameparse, { generate, isLTS } from "./helpers/nameparse.ts";
 import prgss from "cli-progress";
 import { select } from "@inquirer/prompts";
 import chalk from "chalk";
@@ -8,7 +8,7 @@ import fs from "node:fs";
 import path from "node:path";
 import os from "node:os";
 import got, { RequestError } from "got";
-import { cache } from "./helpers/cache.js";
+import { cache } from "./helpers/cache.ts";
 export default async function install({ ver }: { ver: string }) {
 	let versionName: string;
 	try {

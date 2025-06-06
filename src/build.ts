@@ -6,23 +6,23 @@ import {
 	getVersionPath,
 	isVersionInstalled,
 	listOfAvailableVersions,
-} from "./helpers/cache.js";
+} from "./helpers/cache.ts";
 import chalk from "chalk";
-import nameparse, { generate, isLTS } from "./helpers/nameparse.js";
+import nameparse, { generate, isLTS } from "./helpers/nameparse.ts";
 import semver from "semver";
 import os from "node:os";
-import install from "./install.js";
+import install from "./install.ts";
 import fs from "node:fs";
 import path from "node:path";
 import esbuild from "esbuild";
-import getConfig from "./helpers/configloader.js";
+import getConfig from "./helpers/configloader.ts";
 import temp from "temp";
 import { inject } from "postject";
 import { spawnSync } from "node:child_process";
-import shasumMatch from "./helpers/shasum.js";
+import shasumMatch from "./helpers/shasum.ts";
 import { readPackage } from "read-pkg";
-import rcedit from "./helpers/rcedit.js";
-import isWineInstalled from "./helpers/iswineinstalled.js";
+import rcedit from "./helpers/rcedit.ts";
+import isWineInstalled from "./helpers/iswineinstalled.ts";
 import { canRunWindowsExeNatively } from "cross-spawn-windows-exe";
 
 // steps for building exe (4 steps: build, generate blob, inject blob, set metadata)

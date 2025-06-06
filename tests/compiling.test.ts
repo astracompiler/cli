@@ -1,10 +1,10 @@
 import { execSync } from "node:child_process";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import fs from "node:fs";
-import build from "../src/build.js";
-import install from "../src/install.js";
-import versions from "../src/versions.js";
-import init from "../src/init.js";
+import build from "../src/build.ts";
+import install from "../src/install.ts";
+import versions from "../src/versions.ts";
+import init from "../src/init.ts";
 import got from "got";
 import { platform } from "node:os";
 

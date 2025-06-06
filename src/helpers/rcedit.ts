@@ -6,7 +6,7 @@ import {
 	normalizePath,
 	spawnExe,
 } from "cross-spawn-windows-exe";
-import isWineInstalled from "./iswineinstalled.js";
+import isWineInstalled from "./iswineinstalled.ts";
 
 const pairSettings = ["version-string", "resource-string"];
 const singleSettings = [
@@ -28,7 +28,9 @@ export default async function rcedit(exe: string, options: Rcedit.Options) {
 
 	for (const name of pairSettings as (keyof Rcedit.Options)[]) {
 		if ((options as Record<string, unknown>)[name]) {
-			for (const [key, value] of Object.entries((options as Record<string, object>)[name])) {
+			for (const [key, value] of Object.entries(
+				(options as Record<string, object>)[name],
+			)) {
 				args.push(`--set-${name}`, key, value as string);
 			}
 		}

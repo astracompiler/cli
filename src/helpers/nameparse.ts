@@ -1,6 +1,6 @@
 import got from "got";
 import path from "node:path";
-import { cache } from "./cache.js";
+import { cache } from "./cache.ts";
 
 export default function nameparse(name: string): {
 	arch: "x86" | "x64" | "arm64";

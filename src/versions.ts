@@ -1,9 +1,9 @@
 import chalk from "chalk";
-import nameparse from "./helpers/nameparse.js";
+import nameparse from "./helpers/nameparse.ts";
 import semver from "semver";
 import log from "signale";
 import got, { RequestError } from "got";
-import { cache } from "./helpers/cache.js";
+import { cache } from "./helpers/cache.ts";
 export default async function versions() {
 	let res: Record<string, unknown> = {};
 	try {

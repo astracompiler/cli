@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import nameparse, { generate, isLTS } from "../src/helpers/nameparse.js";
-import { isVersionInstalled } from "../src/helpers/cache.js";
+import nameparse, { generate, isLTS } from "../src/helpers/nameparse.ts";
+import { isVersionInstalled } from "../src/helpers/cache.ts";
 import { got } from "got";
 
 beforeAll(async () => {

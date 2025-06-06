@@ -36,7 +36,7 @@
 		// "types": [],                                      /* Specify type package names to be included without being referenced in a source file. */
 		// "allowUmdGlobalAccess": true,                     /* Allow accessing UMD globals from modules. */
 		// "moduleSuffixes": [],                             /* List of file name suffixes to search when resolving a module. */
-		"allowImportingTsExtensions": true,               /* Allow imports to include TypeScript file extensions. Requires '--moduleResolution bundler' and either '--noEmit' or '--emitDeclarationOnly' to be set. */
+		"allowImportingTsExtensions": true /* Allow imports to include TypeScript file extensions. Requires '--moduleResolution bundler' and either '--noEmit' or '--emitDeclarationOnly' to be set. */,
 		// "resolvePackageJsonExports": true,                /* Use the package.json 'exports' field when resolving package imports. */
 		// "resolvePackageJsonImports": true,                /* Use the package.json 'imports' field when resolving imports. */
 		// "customConditions": [],                           /* Conditions to set in addition to the resolver-specific defaults when resolving imports. */
@@ -56,7 +56,7 @@
 		// "emitDeclarationOnly": true,                      /* Only output d.ts files and not JavaScript files. */
 		// "sourceMap": true,                                /* Create source map files for emitted JavaScript files. */
 		// "inlineSourceMap": true,                          /* Include sourcemap files inside the emitted JavaScript. */
-		"noEmit": true,                                   /* Disable emitting files from a compilation. */
+		"noEmit": true /* Disable emitting files from a compilation. */,
 		// "outFile": "",                                  /* Specify a file that bundles all outputs into one JavaScript file. If 'declaration' is true, also designates a file that bundles all .d.ts output. */
 		"outDir": "./dist" /* Specify an output folder for all emitted files. */,
 		//"removeComments": true,                           /* Disable emitting comments. */

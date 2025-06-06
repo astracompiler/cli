@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import path from "node:path";
 import fs from "node:fs/promises"; // ⬅️ Używamy wersji async `fs`
 import got from "got";
-import { cache } from "./cache.js";
+import { cache } from "./cache.ts";
 
 function hash(b: Buffer): string {
 	return createHash("sha256").update(b).digest("hex");
