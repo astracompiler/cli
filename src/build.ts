@@ -221,7 +221,7 @@ export default async function build({
 		log.info("Version already installed.");
 	}
 
-	if (!fs.existsSync(config?.exe.icon)) {
+	if (!fs.existsSync(config?.exe.icon) && config?.exe.icon) {
 		log.warn(
 			`Icon file ${chalk.red(config?.exe.icon)} does not exist. Metadata setting will be skipped.`,
 		);
