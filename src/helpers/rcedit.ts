@@ -26,11 +26,14 @@ export default async function rcedit(exe: string, options: Rcedit.Options) {
 	const rceditExe = isx64()
 		? path.join(node_modules, "/rcedit/bin/rcedit-x64.exe")
 		: path.join(node_modules, "/rcedit/bin/rcedit.exe");
-
+	let program = rceditExe;
+	
 	const args = [];
 
-	if (usingWine) args.push("wine");
-	args.push(rceditExe, pathToExe);
+	if (usingWine) {
+		program = "wine";
+		args.push(rceditExe);
+	}
 
 	for (const name of pairSettings as (keyof Rcedit.Options)[]) {
 		if ((options as Record<string, unknown>)[name]) {
@@ -64,7 +67,7 @@ export default async function rcedit(exe: string, options: Rcedit.Options) {
 	}
 
 	try {
-		await spawnExe(rceditExe, args, spawnOptions);
+		await spawnExe(program, args, spawnOptions);
 	} catch (error) {
 		console.error("Error occurred while editing resource:", error);
 	}
