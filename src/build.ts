@@ -15,13 +15,14 @@ import install from "./install.js";
 import fs from "node:fs";
 import path from "node:path";
 import esbuild from "esbuild";
-import getConfig from "./helpers/configLoader.js";
+import getConfig from "./helpers/configloader.js";
 import temp from "temp";
 import { inject } from "postject";
 import { spawnSync } from "node:child_process";
 import shasumMatch from "./helpers/shasum.js";
 import { readPackage } from "read-pkg";
 import rcedit from "rcedit";
+
 // steps for building exe (4 steps: build, generate blob, inject blob, set metadata)
 const STEPS = 4;
 function step(curr: number) {
