@@ -19,11 +19,11 @@ const noPrefixSettings = ["application-manifest"];
 
 export default async function rcedit(exe: string, options: Rcedit.Options) {
 	const pathToExe = await normalizePath(exe);
-    const usingWine = isWineInstalled() && !canRunWindowsExeNatively();
+	const usingWine = isWineInstalled() && !canRunWindowsExeNatively();
 	const rceditExe = isx64()
 		? "node_modules/rcedit/bin/rcedit-x64.exe"
 		: "node_modules/rcedit/bin/rcedit.exe";
-    
+
 	const args = [pathToExe];
 
 	for (const name of pairSettings as (keyof Rcedit.Options)[]) {
@@ -45,7 +45,7 @@ export default async function rcedit(exe: string, options: Rcedit.Options) {
 			args.push(`--${name}`, (options as any)[name]);
 		}
 	}
-        
+
 	const spawnOptions = {
 		env: { ...process.env },
 	};

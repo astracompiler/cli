@@ -152,8 +152,8 @@ cli.command(
 );
 
 (async () => {
-	await cli.parse();
-	if ((await cli.argv)._.length === 0) {
+	const argv = await cli.parse();
+	if (argv._.length === 0) {
 		// If no command is provided, show help
 		cli.showHelp();
 	}

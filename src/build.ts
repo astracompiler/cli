@@ -117,7 +117,6 @@ export default async function build({
 	let versionName: string;
 	const config = await getConfig();
 
-
 	// validate arguments
 	const argsValidate = [outDir, node].filter((arg) => arg !== undefined);
 	if (argsValidate.length < 2 && argsValidate.length > 0) {
@@ -151,6 +150,10 @@ export default async function build({
 			}
 		}
 	}
+
+	//
+	// end of validation
+	//
 
 	if (!argsProvided) {
 		let versions = res.assets;
@@ -218,13 +221,20 @@ export default async function build({
 		log.info("Version already installed.");
 	}
 
+	if (!fs.existsSync(config?.exe.icon)) {
+		log.warn(
+			`Icon file ${chalk.red(config?.exe.icon)} does not exist. Metadata setting will be skipped.`,
+		);
+		noMetadata = true;
+	}
+
 	// build step 1
 	log.start(`${step(1)} Building project...`);
 
 	const nodePath = config?.outFile
 		? path.resolve(config.outFile)
 		: path.join(
-				config?.outDir || path.join(process.cwd(), "dist"),
+				config?.outDir || outDir || path.join(process.cwd(), "dist"),
 				"build.exe",
 			);
 
@@ -266,14 +276,16 @@ export default async function build({
 
 	// meta step 2
 	log.start(`${step(2)} Setting file metadata...`);
-	
+
 	function checkWine(meta: boolean) {
 		if (meta && !isWineInstalled() && !canRunWindowsExeNatively()) {
 			log.error(
 				"Wine is not installed or not configured properly. Please install Wine to set file metadata.",
 			);
 			log.error("Download here: https://l.qwerty.ovh/astra-wine-dl");
-			log.info("If you don't want to set file metadata, use --noMetadata flag or set it in the config.");
+			log.info(
+				"If you don't want to set file metadata, use --noMetadata flag or set it in the config.",
+			);
 			process.exit(1);
 		}
 	}
