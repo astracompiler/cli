@@ -34,7 +34,7 @@ export default async function rcedit(exe: string, options: Rcedit.Options) {
 		program = "wine";
 		args.push(rceditExe);
 	}
-	
+
 	args.push(pathToExe);
 
 	for (const name of pairSettings as (keyof Rcedit.Options)[]) {
