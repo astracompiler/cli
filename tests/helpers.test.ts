@@ -2,6 +2,7 @@ import { beforeAll, describe, expect, it } from "vitest";
 import nameparse, { generate, isLTS } from "../src/helpers/nameparse.ts";
 import { isVersionInstalled } from "../src/helpers/cache.ts";
 import { got } from "got";
+import isWineInstalled from "../src/helpers/iswineinstalled.ts";
 
 beforeAll(async () => {
 	try {
@@ -53,6 +54,15 @@ describe("helpers", () => {
 				version: "v22.15.1",
 			}),
 		).toEqual("node_v22.15.1-win-x64");
+	});
+
+	it("should return wine is not installed", () => {
+		if (process.env.CI && (process.platform === "darwin" || process.platform === "linux")) {
+			expect(isWineInstalled()).toBe(false);
+		} else {
+			// skip test
+			expect(true).toBe(true);
+		}
 	});
 
 	it("should return version is not installed", () => {
