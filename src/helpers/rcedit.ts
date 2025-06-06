@@ -27,22 +27,22 @@ export default async function rcedit(exe: string, options: Rcedit.Options) {
 	const args = [pathToExe];
 
 	for (const name of pairSettings as (keyof Rcedit.Options)[]) {
-		if ((options as any)[name]) {
-			for (const [key, value] of Object.entries((options as any)[name])) {
+		if ((options as Record<string, unknown>)[name]) {
+			for (const [key, value] of Object.entries((options as Record<string, object>)[name])) {
 				args.push(`--set-${name}`, key, value as string);
 			}
 		}
 	}
 
 	for (const name of singleSettings) {
-		if ((options as any)[name]) {
-			args.push(`--set-${name}`, (options as any)[name]);
+		if ((options as Record<string, unknown>)[name]) {
+			args.push(`--set-${name}`, (options as Record<string, string>)[name]);
 		}
 	}
 
 	for (const name of noPrefixSettings) {
-		if ((options as any)[name]) {
-			args.push(`--${name}`, (options as any)[name]);
+		if ((options as Record<string, unknown>)[name]) {
+			args.push(`--${name}`, (options as Record<string, string>)[name]);
 		}
 	}
 
