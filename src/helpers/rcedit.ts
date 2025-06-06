@@ -24,7 +24,10 @@ export default async function rcedit(exe: string, options: Rcedit.Options) {
 		? "node_modules/rcedit/bin/rcedit-x64.exe"
 		: "node_modules/rcedit/bin/rcedit.exe";
 
-	const args = [pathToExe];
+	const args = [];
+	
+	if (usingWine) args.push("wine");
+	args.push(rceditExe, pathToExe);
 
 	for (const name of pairSettings as (keyof Rcedit.Options)[]) {
 		if ((options as Record<string, unknown>)[name]) {
