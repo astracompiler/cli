@@ -7,6 +7,7 @@ import versions from "../src/versions.ts";
 import init from "../src/init.ts";
 import got from "got";
 import { platform } from "node:os";
+let skipping = false;
 
 describe(
 	"compiling",
@@ -18,13 +19,13 @@ describe(
 					console.log(
 						"GitHub API is not reachable. Rate limit exceeded or network issue.",
 					);
-					this.skip();
+					skipping = true;
 				}
 			} catch (error) {
 				console.log(
 					"GitHub API is not reachable. Rate limit exceeded or network issue.",
 				);
-				this.skip();
+				skipping = true;
 			}
 			fs.rmSync("temp", { recursive: true, force: true });
 			execSync("yarn build");
@@ -46,7 +47,7 @@ describe(
 			}
 		}, 1000 * 120);
 
-		it("esm compiling", async () => {
+		(skipping ? it.skip : it)("esm compiling", async () => {
 			await build({
 				entry: "temp/test.esm.ts",
 				outDir: "temp",
@@ -56,7 +57,7 @@ describe(
 			});
 		});
 
-		it("cjs compiling", async () => {
+		(skipping ? it.skip : it)("cjs compiling", async () => {
 			await build({
 				entry: "temp/test.cjs.ts",
 				outDir: "temp",
@@ -66,7 +67,7 @@ describe(
 			});
 		});
 
-		it("should throw do not exists error", async () => {
+		(skipping ? it.skip : it)("should throw do not exists error", async () => {
 			const spy = vi.spyOn(process, "exit").mockImplementation((code) => {
 				throw new Error(`exit ${code}`);
 			});
@@ -84,44 +85,50 @@ describe(
 			spy.mockRestore();
 		});
 
-		it("should throw error if entry is not defined", async () => {
-			const spy = vi.spyOn(process, "exit").mockImplementation((code) => {
-				throw new Error(`exit ${code}`);
-			});
+		(skipping ? it.skip : it)(
+			"should throw error if entry is not defined",
+			async () => {
+				const spy = vi.spyOn(process, "exit").mockImplementation((code) => {
+					throw new Error(`exit ${code}`);
+				});
 
-			await expect(
-				build({
-					// @ts-ignore
-					entry: undefined,
-					outDir: "temp/b.exe",
-					node: "node_v99.99.99-win-x64",
-					disShasumCheck: false,
-					noMetadata: true,
-				}),
-			).rejects.toThrow("exit 1");
+				await expect(
+					build({
+						// @ts-ignore
+						entry: undefined,
+						outDir: "temp/b.exe",
+						node: "node_v99.99.99-win-x64",
+						disShasumCheck: false,
+						noMetadata: true,
+					}),
+				).rejects.toThrow("exit 1");
 
-			spy.mockRestore();
-		});
+				spy.mockRestore();
+			},
+		);
 
-		it("should throw not a js/ts file error", async () => {
-			const spy = vi.spyOn(process, "exit").mockImplementation((code) => {
-				throw new Error(`exit ${code}`);
-			});
+		(skipping ? it.skip : it)(
+			"should throw not a js/ts file error",
+			async () => {
+				const spy = vi.spyOn(process, "exit").mockImplementation((code) => {
+					throw new Error(`exit ${code}`);
+				});
 
-			await expect(
-				build({
-					entry: "temp/im-not-a-js-ts-file",
-					outDir: "temp/b.exe",
-					node: "node_v22.15.1-win-x64",
-					disShasumCheck: false,
-					noMetadata: true,
-				}),
-			).rejects.toThrow("exit 1");
+				await expect(
+					build({
+						entry: "temp/im-not-a-js-ts-file",
+						outDir: "temp/b.exe",
+						node: "node_v22.15.1-win-x64",
+						disShasumCheck: false,
+						noMetadata: true,
+					}),
+				).rejects.toThrow("exit 1");
 
-			spy.mockRestore();
-		});
+				spy.mockRestore();
+			},
+		);
 
-		it("should throw not a file error", async () => {
+		(skipping ? it.skip : it)("should throw not a file error", async () => {
 			const spy = vi.spyOn(process, "exit").mockImplementation((code) => {
 				throw new Error(`exit ${code}`);
 			});
@@ -139,11 +146,14 @@ describe(
 			spy.mockRestore();
 		});
 
-		it("should show avaliable node versions", async () => {
-			await expect(versions()).resolves.not.toThrow();
-		});
+		(skipping ? it.skip : it)(
+			"should show avaliable node versions",
+			async () => {
+				await expect(versions()).resolves.not.toThrow();
+			},
+		);
 
-		it("should create config file", async () => {
+		(skipping ? it.skip : it)("should create config file", async () => {
 			const spy = vi.spyOn(process, "cwd").mockReturnValue("temp");
 			const spy2 = vi
 				.spyOn(process, "exit")
@@ -157,25 +167,28 @@ describe(
 			spy2.mockRestore();
 		});
 
-		it("should crash beacuse i didn't provide all arguments", async () => {
-			const spy = vi.spyOn(process, "exit").mockImplementation((code) => {
-				throw new Error(`exit ${code}`);
-			});
+		(skipping ? it.skip : it)(
+			"should crash beacuse i didn't provide all arguments",
+			async () => {
+				const spy = vi.spyOn(process, "exit").mockImplementation((code) => {
+					throw new Error(`exit ${code}`);
+				});
 
-			await expect(
-				// @ts-ignore
-				build({
-					entry: "temp/hello-i-am-a-folder",
-					node: "node_v22.15.1-win-x64",
-					disShasumCheck: false,
-					noMetadata: true,
-				}),
-			).rejects.toThrow("exit 1");
+				await expect(
+					// @ts-ignore
+					build({
+						entry: "temp/hello-i-am-a-folder",
+						node: "node_v22.15.1-win-x64",
+						disShasumCheck: false,
+						noMetadata: true,
+					}),
+				).rejects.toThrow("exit 1");
 
-			spy.mockRestore();
-		});
+				spy.mockRestore();
+			},
+		);
 
-		// it("should throw error if config file already exists", async () => {
+		// (skipping ? it.skip : it)("should throw error if config file already exists", async () => {
 		// 	const spy = vi.spyOn(process, "cwd").mockReturnValue("temp");
 		// 	const spy2 = vi.spyOn(process, "exit").mockImplementation((code) => {
 		// 		throw new Error(`exit ${code}`);

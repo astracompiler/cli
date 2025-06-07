@@ -4,6 +4,8 @@ import { isVersionInstalled } from "../src/helpers/cache.ts";
 import { got } from "got";
 import isWineInstalled from "../src/helpers/iswineinstalled.ts";
 
+let skipping = false;
+
 describe("helpers", () => {
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	beforeAll(async function (this: any) {
@@ -12,25 +14,29 @@ describe("helpers", () => {
 				console.log(
 					"GitHub API is not reachable. Rate limit exceeded or network issue.",
 				);
-				this.skip();
+				skipping = true;
 			}
 		} catch (error) {
 			console.log(
 				"GitHub API is not reachable. Rate limit exceeded or network issue.",
 			);
-			this.skip();
+			skipping = true;
 		}
 	});
 
-	it("should return it's LTS version", async () => {
-		await expect(isLTS("node_v22.15.1-win-x64")).resolves.toBe(true);
-	}, 15000);
+	(skipping ? it.skip : it)(
+		"should return it's LTS version",
+		async () => {
+			await expect(isLTS("node_v22.15.1-win-x64")).resolves.toBe(true);
+		},
+		15000,
+	);
 
-	it("should return it's not LTS version", async () => {
+	(skipping ? it.skip : it)("should return it's not LTS version", async () => {
 		await expect(isLTS("node_v23.11.1-win-x64")).resolves.toBe(false);
 	});
 
-	it("should return valid object", () => {
+	(skipping ? it.skip : it)("should return valid object", () => {
 		expect(nameparse("node_v22.15.1-win-x64")).toEqual({
 			arch: "x64",
 			os: "win",
@@ -39,7 +45,7 @@ describe("helpers", () => {
 		});
 	});
 
-	it("should return invalid valid object", () => {
+	(skipping ? it.skip : it)("should return invalid valid object", () => {
 		expect(nameparse("node-win-v22.15.1-x64")).not.toEqual({
 			arch: "x64",
 			os: "win",
@@ -48,7 +54,7 @@ describe("helpers", () => {
 		});
 	});
 
-	it("should return valid version string", () => {
+	(skipping ? it.skip : it)("should return valid version string", () => {
 		expect(
 			generate({
 				arch: "x64",
@@ -59,7 +65,7 @@ describe("helpers", () => {
 		).toEqual("node_v22.15.1-win-x64");
 	});
 
-	it("should return wine is not installed", () => {
+	(skipping ? it.skip : it)("should return wine is not installed", () => {
 		if (
 			process.env.CI &&
 			(process.platform === "darwin" || process.platform === "linux")
@@ -71,7 +77,7 @@ describe("helpers", () => {
 		}
 	});
 
-	it("should return version is not installed", () => {
+	(skipping ? it.skip : it)("should return version is not installed", () => {
 		expect(isVersionInstalled("invalid_version")).toBe(false);
 	});
 });
