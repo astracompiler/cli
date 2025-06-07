@@ -3,9 +3,7 @@ declare namespace Rcedit {
 		| "asInvoker"
 		| "highestAvailable"
 		| "requireAdministrator";
-	interface ResourceStrings {
-		[n: number]: string;
-	}
+	type ResourceStrings = Record<number, string>;
 	interface VersionStringOptions {
 		Comments?: string;
 		CompanyName?: string;
