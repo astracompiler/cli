@@ -11,14 +11,18 @@ import { platform } from "node:os";
 describe(
 	"compiling",
 	() => {
-		beforeAll(async function() {
+		beforeAll(async function () {
 			try {
 				if ((await got("https://api.github.com")).statusCode !== 200) {
-					console.log("GitHub API is not reachable. Rate limit exceeded or network issue.");
+					console.log(
+						"GitHub API is not reachable. Rate limit exceeded or network issue.",
+					);
 					this.skip();
 				}
 			} catch (error) {
-				console.log("GitHub API is not reachable. Rate limit exceeded or network issue.");
+				console.log(
+					"GitHub API is not reachable. Rate limit exceeded or network issue.",
+				);
 				this.skip();
 			}
 			fs.rmSync("temp", { recursive: true, force: true });
@@ -41,7 +45,6 @@ describe(
 			}
 		}, 1000 * 120);
 
-		
 		it("esm compiling", async () => {
 			await build({
 				entry: "temp/test.esm.ts",

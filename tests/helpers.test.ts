@@ -4,21 +4,23 @@ import { isVersionInstalled } from "../src/helpers/cache.ts";
 import { got } from "got";
 import isWineInstalled from "../src/helpers/iswineinstalled.ts";
 
-beforeAll(async () => {
-	try {
-		if ((await got("https://api.github.com")).statusCode !== 200) {
-			throw new Error(
+describe("helpers", () => {
+	beforeAll(async function () {
+		try {
+			if ((await got("https://api.github.com")).statusCode !== 200) {
+				console.log(
+					"GitHub API is not reachable. Rate limit exceeded or network issue.",
+				);
+				this.skip();
+			}
+		} catch (error) {
+			console.log(
 				"GitHub API is not reachable. Rate limit exceeded or network issue.",
 			);
+			this.skip();
 		}
-	} catch (error) {
-		throw new Error(
-			"GitHub API is not reachable. Rate limit exceeded or network issue.",
-		);
-	}
-});
+	});
 
-describe("helpers", () => {
 	it("should return it's LTS version", async () => {
 		await expect(isLTS("node_v22.15.1-win-x64")).resolves.toBe(true);
 	}, 15000);
