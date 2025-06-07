@@ -8,41 +8,40 @@ import init from "../src/init.ts";
 import got from "got";
 import { platform } from "node:os";
 
-beforeAll(async () => {
-	try {
-		if ((await got("https://api.github.com")).statusCode !== 200) {
-			throw new Error(
-				"GitHub API is not reachable. Rate limit exceeded or network issue.",
-			);
-		}
-	} catch (error) {
-		throw new Error(
-			"GitHub API is not reachable. Rate limit exceeded or network issue.",
-		);
-	}
-	fs.rmSync("temp", { recursive: true, force: true });
-	execSync("yarn build");
-	fs.mkdirSync("temp");
-	fs.mkdirSync("temp/hello-i-am-a-folder");
-	fs.writeFileSync(
-		"temp/test.esm.ts",
-		"import log from'console';log('Hello world!');",
-	);
-	fs.writeFileSync(
-		"temp/test.cjs.ts",
-		"const {log}=require('console');log('Hello world!');",
-	);
-	fs.writeFileSync("temp/im-not-a-js-ts-file", "Hello world!");
-	if (!process.env.CI) {
-		await install({
-			ver: "node_v22.15.1-win-x64",
-		});
-	}
-}, 1000 * 120);
-
 describe(
 	"compiling",
 	() => {
+		beforeAll(async function() {
+			try {
+				if ((await got("https://api.github.com")).statusCode !== 200) {
+					console.log("GitHub API is not reachable. Rate limit exceeded or network issue.");
+					this.skip();
+				}
+			} catch (error) {
+				console.log("GitHub API is not reachable. Rate limit exceeded or network issue.");
+				this.skip();
+			}
+			fs.rmSync("temp", { recursive: true, force: true });
+			execSync("yarn build");
+			fs.mkdirSync("temp");
+			fs.mkdirSync("temp/hello-i-am-a-folder");
+			fs.writeFileSync(
+				"temp/test.esm.ts",
+				"import log from'console';log('Hello world!');",
+			);
+			fs.writeFileSync(
+				"temp/test.cjs.ts",
+				"const {log}=require('console');log('Hello world!');",
+			);
+			fs.writeFileSync("temp/im-not-a-js-ts-file", "Hello world!");
+			if (!process.env.CI) {
+				await install({
+					ver: "node_v22.15.1-win-x64",
+				});
+			}
+		}, 1000 * 120);
+
+		
 		it("esm compiling", async () => {
 			await build({
 				entry: "temp/test.esm.ts",
