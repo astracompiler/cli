@@ -11,7 +11,8 @@ import { platform } from "node:os";
 describe(
 	"compiling",
 	() => {
-		beforeAll(async function () {
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+		beforeAll(async function (this: any) {
 			try {
 				if ((await got("https://api.github.com")).statusCode !== 200) {
 					console.log(
