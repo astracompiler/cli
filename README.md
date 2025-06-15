@@ -1,7 +1,7 @@
 <p align=center><img src="https://raw.githubusercontent.com/astracompiler/cli/main/astra.png" width="100"/></p>
 <h1 align=center>Astra</h1>
 <p align=center>🚀 Fast, reliable and easy-to-use js-to-exe compiler.</p>
-<p align=center><a href="https://astra-js.netlify.app">Docs</a> | <a href="https://npmjs.com/package/astra-cli">npm</a> | <a href="https://github.com/astracompiler/cli">GitHub</a></p>
+<p align=center><a href="https://l.qwerty.ovh/astra-js-readme">Docs</a> | <a href="https://npmjs.com/package/astra-cli">npm</a> | <a href="https://github.com/astracompiler/cli">GitHub</a></p>
 <p align=center>
     <a href="#"><img alt="NPM Downloads" src="https://img.shields.io/npm/dw/astra-cli?label="></a>
     <a href="https://npmjs.com/package/astra-cli"><img alt="NPM Version" src="https://img.shields.io/npm/v/astra-cli?label="></a>
