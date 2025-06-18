@@ -63,7 +63,7 @@
 		"yargs": "^18.0.0"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^1.9.4",
+		"@biomejs/biome": "^2.0.0",
 		"@types/cli-progress": "^3.11.6",
 		"@types/got": "^9.6.12",
 		"@types/node": "^22.13.10",
