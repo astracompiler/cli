@@ -1,0 +1,6 @@
+dist
+*.test.js
+*.test.ts
+*.js
+temp
+coverage
