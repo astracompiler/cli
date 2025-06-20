@@ -22,7 +22,7 @@ Using [upx](https://github.com/upx/upx) you can go down up to ~30MB
 
 It's aiming to compile servers (express, fastify) or CLIs (commander) so it's not replacement of electron. 
 
-For now it only compiles windows applications. (working on macOS and linux)
+For now it only compiles windows applications. (I'm working on macOS and linux)
 
 ### Features
 - **Different than the others** - Astra is a new approach to compiling JavaScript/TypeScript applications. It uses a different method than other compilers like pkg or nexe. 

@@ -63,7 +63,7 @@
 		"yargs": "^18.0.0"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^1.9.4",
+		"@biomejs/biome": "^2.0.0",
 		"@types/cli-progress": "^3.11.6",
 		"@types/got": "^9.6.12",
 		"@types/node": "^22.13.10",
@@ -72,7 +72,7 @@
 		"@types/temp": "^0.9.4",
 		"@types/yargs": "^17.0.33",
 		"@vitest/coverage-v8": "^3.1.4",
-		"@vitest/ui": "3.2.3",
+		"@vitest/ui": "3.2.4",
 		"esbuild-node-externals": "^1.18.0",
 		"rimraf": "^6.0.1",
 		"typescript": "^5.8.2",
