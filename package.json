@@ -1,6 +1,6 @@
 {
 	"name": "astra-cli",
-	"version": "1.3.0",
+	"version": "1.3.1",
 	"main": "./dist/astra.js",
 	"repository": {
 		"type": "git",
@@ -17,8 +17,8 @@
 	"scripts": {
 		"minify": "tsc && node ./minify.tool.js",
 		"astra": "node ./dist/astra.js",
-		"lint": "biome lint",
-		"fmt": "biome format --write",
+		"lint": "yarn biome lint",
+		"fmt": "yarn biome format --write",
 		"build": "rimraf dist && node build.tool.js",
 		"pb": "yarn lint && yarn fmt && yarn build && yarn npm publish",
 		"test": "vitest run --coverage",
