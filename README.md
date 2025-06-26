@@ -76,7 +76,7 @@ astra --help
 ```
 
 ## How it works?
-1. Code is linted and bundled with esbuild,
+1. Code is checked and bundled with esbuild,
 2. Then astra is generating blob which will be injected into node.exe binary,
 3. Next astra is editing metadata of your binary (adding icon, copyright),
 4. And finally postject injects blob into final executable.
