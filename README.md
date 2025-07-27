@@ -41,6 +41,20 @@ For now it only compiles windows applications. (I'm working on macOS and linux)
 
 - **Future-proof** - Made with trusted, constantly evolving tools.
 
+## Compared to others
+| Name                     | astra        | [pkg](https://github.com/vercel/pkg)       | [nexe](https://github.com/nexe/nexe)           |
+|--------------------------|--------------|--------------|----------------|
+| Latest supported version | Node 24      | Node 18      | Node 14        |
+| Supports ESM             | ✅            | ❌            | ❌              |
+| Built-in metadata edit   | ✅            | ❌            | ❌              |
+| Output size              | ~75MB        | ~90MB        | ~90MB          |
+| Bundles code             | ✅            | ❌            | ❌              |
+| Building Speed           | ⚡ Fast       | ⚡⚡ Very Fast | ⚡⚡ Very Fast   |
+| Stars                    | ![Astra Repo stars](https://img.shields.io/github/stars/astracompiler/cli) | ![Pkg Repo stars](https://img.shields.io/github/stars/vercel/pkg) | ![Nexe Repo stars](https://img.shields.io/github/stars/nexe/nexe) |
+| Difficulty               | 🟢 Easy       | 🟡 Medium     | 🟡 Medium       |
+| Maintained               | ✅            | ❌ (Archived) | 🟡 Low activity |
+| TypeScript Support       | ✅            | ❌ (requires manual building)           | ❌ (requires manual building)              |
+
 ## Contributing
 🤝 I welcome pull requests! Every contribution will be reviewed and appreciated - even small fixes.
 
