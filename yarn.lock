@@ -662,10 +662,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@keyv/serialize@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@keyv/serialize@npm:1.1.0"
-  checksum: 10c0/30e34adf4fff52374c2c531e3ff215eed6414350ee56eebcb98c422feaff171b4900c73082a72399a6bfbc5ce60fbb6f968594110c960521923499146bc68c20
+"@keyv/serialize@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@keyv/serialize@npm:1.1.1"
+  checksum: 10c0/b0008cae4a54400c3abf587b8cc2474c6f528ee58969ce6cf9cb07a04006f80c73c85971d6be6544408318a2bc40108236a19a82aea0a6de95aae49533317374
   languageName: node
   linkType: hard
 
@@ -2469,11 +2469,11 @@ __metadata:
   linkType: hard
 
 "keyv@npm:^5.3.3":
-  version: 5.5.0
-  resolution: "keyv@npm:5.5.0"
+  version: 5.5.1
+  resolution: "keyv@npm:5.5.1"
   dependencies:
-    "@keyv/serialize": "npm:^1.1.0"
-  checksum: 10c0/2db63fd2abcdf71929f032569673b6edd0de111edb012411658e2589dc5f49793a98aecd56c67fafda3f90a31f32e35555a97f8621040728260c66ad8daeea48
+    "@keyv/serialize": "npm:^1.1.1"
+  checksum: 10c0/cbfaa4345dd285c99547417e7d5aabf06205f368e78b6e1b6d6eb04182b6b9aac373ae4b7da0ea78cafd1062643be2a364d47eb41881516871aa43930cc08ce7
   languageName: node
   linkType: hard
 
