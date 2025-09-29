@@ -2452,11 +2452,11 @@ __metadata:
   linkType: hard
 
 "keyv@npm:^5.3.3":
-  version: 5.5.2
-  resolution: "keyv@npm:5.5.2"
+  version: 5.5.3
+  resolution: "keyv@npm:5.5.3"
   dependencies:
     "@keyv/serialize": "npm:^1.1.1"
-  checksum: 10c0/b0a224210e8bbc4a5913535aa7cc8552809dc81ad67311cc78a2ccfe5485b82b23b8e28ea3a1202e8352c18dd2a0b12b49cda5bb933958d2dcf88042db54c9d0
+  checksum: 10c0/6890ed8a76e6b16034ceda89a4a7dc9cd1ebd05bf0ee1f7f3d3fe37ac3e4a6196d710ab2fef3d47cf8c394b61104b3bfcab17f23cc6e0dc2dcbe36483a43f84d
   languageName: node
   linkType: hard
 
