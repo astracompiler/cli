@@ -2067,8 +2067,8 @@ __metadata:
   linkType: hard
 
 "got@npm:^14.4.7":
-  version: 14.6.0
-  resolution: "got@npm:14.6.0"
+  version: 14.6.1
+  resolution: "got@npm:14.6.1"
   dependencies:
     "@sindresorhus/is": "npm:^7.0.1"
     "@szmarczak/http-timer": "npm:^5.0.1"
@@ -2082,7 +2082,7 @@ __metadata:
     p-cancelable: "npm:^4.0.1"
     responselike: "npm:^4.0.2"
     type-fest: "npm:^4.26.1"
-  checksum: 10c0/ad96cbfa1d9157a9678aeb32de7fa7399a6f88071aa454a678d092ef2a5eb845b4e38d878dddd566ece42acd3bef7ac9df769735fc13a5b288414536b0f24bba
+  checksum: 10c0/3569d53a9d344e72fa77a2c4a8fa96a4963da3896aad37b552c589d020e2d310829be4d2ca6e46e5a3f9b4dcf16ce0176c36d3c6d5ba6d9d37e0bc6b4610f1f4
   languageName: node
   linkType: hard
 
