@@ -1236,7 +1236,7 @@ __metadata:
     keyv: "npm:^5.3.3"
     keyv-file: "npm:^5.1.2"
     postject: "npm:^1.0.0-alpha.5"
-    rcedit: "npm:^4.0.1"
+    rcedit: "npm:^5.0.0"
     read-pkg: "npm:^9.0.1"
     rimraf: "npm:^6.0.1"
     semver: "npm:^7.7.1"
@@ -3047,12 +3047,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rcedit@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "rcedit@npm:4.0.1"
+"rcedit@npm:^5.0.0":
+  version: 5.0.1
+  resolution: "rcedit@npm:5.0.1"
   dependencies:
     cross-spawn-windows-exe: "npm:^1.1.0"
-  checksum: 10c0/a0afd23390141513a4818b5b6e24d45507f75996234ba4abcdfbaf245753131a9adacc7b84541717dac947d51149aac8715cdf6f2020ae24b173d854c13ebdb3
+  checksum: 10c0/033697ec847f60c2942806e89aa34172fbe517ed7f56191f5d53f1bcd36fcf3e62a514788e8f1dd496db79cf23d059ed82211b3889010709348030eb07e4a8cf
   languageName: node
   linkType: hard
 
