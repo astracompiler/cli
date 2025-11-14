@@ -55,7 +55,7 @@
 		"keyv": "^5.3.3",
 		"keyv-file": "^5.1.2",
 		"postject": "^1.0.0-alpha.5",
-		"rcedit": "^4.0.1",
+		"rcedit": "^5.0.0",
 		"read-pkg": "^9.0.1",
 		"semver": "^7.7.1",
 		"signale": "^1.4.0",
