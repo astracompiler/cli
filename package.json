@@ -50,7 +50,7 @@
 		"cosmiconfig": "^9.0.0",
 		"cross-spawn-windows-exe": "^1.2.0",
 		"dirname-filename-esm": "^1.1.2",
-		"esbuild": "^0.25.0",
+		"esbuild": "^0.27.0",
 		"got": "^14.4.7",
 		"keyv": "^5.3.3",
 		"keyv-file": "^5.1.2",
